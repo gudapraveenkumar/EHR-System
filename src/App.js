@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Route} from "react-router-dom";
+
+import HomePage from "../src/components/home";
+import Authorization from './components/auth';
+import UserDashboard from "./components/user-dashboard";
+import NewTask from './components/new-task';
+import TaskList from './components/task-list';
 
 function App() {
+  const bodyContainer = {
+    paddingRight: '0px',
+    paddingLeft: '0px'
+ };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <div style={bodyContainer} className="container-fluid">
+        <Route path="/home" component = {HomePage}/>
+        <Route path="/authorization" component = {Authorization}/>
+        <Route path="/userDashboard" component = {UserDashboard} />
+        <Route path="/newTask" component = {NewTask} />
+        <Route path="/taskList" component = {TaskList} />
+        <Route path="/" exact component = {HomePage}/>
+      </div>
+      
+    </React.Fragment>
   );
 }
 
