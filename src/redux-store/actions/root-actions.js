@@ -29,6 +29,14 @@ export function foundBadWords(data){
 export function getTasks(){
    return{
       type: "DATA_REQUESTED"
-   }
-}
+   };
+};
+
+export function loginActionHandler(userData){
+   console.log('login data in action =', userData);
+   return{
+      type: "LOGIN_REQUEST",
+      data: userData
+   };
+};
 

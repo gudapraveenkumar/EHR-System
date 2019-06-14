@@ -1,20 +1,26 @@
 import { takeEvery, call, put } from "redux-saga/effects";
+import auth from "../http-services/auth-services";
 
-export default function* watcherSaga() {
-  yield takeEvery("DATA_REQUESTED", workerSaga);
-}
+// Watcher is basically a generator function watching every action we are interested in
+export default function* rootSaga() {
+  // yield takeEvery("DATA_REQUESTED", workerSaga);
+  yield takeEvery("LOGIN_REQUEST", workerSaga);
+};
 
-function* workerSaga() {
+function* workerSaga(params) {
+  console.log('params in worker saga =', params);
   try {
-    const payload = yield call(getData);
-    yield put({ type: "DATA_LOADED", payload });
-  } catch (e) {
-    yield put({ type: "API_ERRORED", payload: e });
+    const response = yield call(auth.login(params.data));
+    console.log('response after login =', response);
+    yield put({ type: "DATA_LOADED", response });
+  } catch (error) {
+    yield put({ type: "API_ERRORED", payload: error });
   }
-}
+};
 
 function getData() {
-  return fetch("https://jsonplaceholder.typicode.com/posts").then(response =>
+  return fetch("https://jsonplaceholder.typicode.com/posts")
+  .then(response =>
     response.json()
   );
-}
+};

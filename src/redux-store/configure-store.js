@@ -1,8 +1,8 @@
 import {createStore, applyMiddleware, compose} from "redux";
 import rootReducer from "./reducers/root-reducer";
 
-import {forbiddenWordsMiddleware} from "../middleware/index";
-import thunk from "redux-thunk";
+// import {forbiddenWordsMiddleware} from "../middleware/index";
+// import thunk from "redux-thunk";
 
 import createSagaMiddleware from "redux-saga";
 import apiSaga from "../redux-sagas/api-saga";
@@ -13,7 +13,7 @@ const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  storeEnhancers(applyMiddleware(forbiddenWordsMiddleware, initialiseSagaMiddleware))
+  storeEnhancers(applyMiddleware(initialiseSagaMiddleware))
 );
 
 initialiseSagaMiddleware.run(apiSaga);

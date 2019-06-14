@@ -14,14 +14,12 @@ class HomePage extends Component {
          <div>
             <AppNavBar />
             <Container>
-               <br></br>
-            <Row>
-               <Col>1 of 2</Col>
-               <Col>
+            <br></br>
+            <Row className="justify-content-center">
+               <Col sm={8} md={5} xs={10}>
                   <Auth />
                </Col>
             </Row>
-           
             </Container>
          </div>
        );
