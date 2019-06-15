@@ -28,8 +28,7 @@ class Login extends Component {
 
     handleLoginSubmit = e =>{
       e.preventDefault();
-      const resp = this.props.onLogin(this.state.loginData);
-      console.log("response after login =", resp);
+      this.props.onLogin(this.state.loginData, this.props);
       let redirect = {...this.state};
       redirect = true;
       this.setState({redirect});
@@ -81,7 +80,7 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch =>{
    return{
-      onLogin: (authData) => dispatch(loginActionHandler(authData))
+      onLogin: (authData, ownProps) => dispatch(loginActionHandler(authData, ownProps))
    }
 };
  

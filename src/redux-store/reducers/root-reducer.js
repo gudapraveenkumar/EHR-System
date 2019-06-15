@@ -8,7 +8,7 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action){
-   console.log("action =", action);
+   // console.log("action =", action);
 
    if(action.type === NEW_TASK_REQUESTED){
       return {
