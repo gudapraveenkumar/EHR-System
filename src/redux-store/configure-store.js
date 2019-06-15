@@ -5,7 +5,7 @@ import rootReducer from "./reducers/root-reducer";
 // import thunk from "redux-thunk";
 
 import createSagaMiddleware from "redux-saga";
-import apiSaga from "../redux-sagas/api-saga";
+import rootSaga from "../redux-sagas/root-saga";
 
 const initialiseSagaMiddleware = createSagaMiddleware();
 
@@ -16,7 +16,7 @@ const store = createStore(
   storeEnhancers(applyMiddleware(initialiseSagaMiddleware))
 );
 
-initialiseSagaMiddleware.run(apiSaga);
+initialiseSagaMiddleware.run(rootSaga);
 
 export default store;
 

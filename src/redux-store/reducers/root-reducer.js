@@ -1,4 +1,4 @@
-import {ADD_TASK, FOUND_BAD_WORD, DATA_LOADED} from "../actions/action-types";
+import {NEW_TASK_REQUESTED, FOUND_BAD_WORD, DATA_LOADED} from "../actions/action-types";
 
 const initialState = {
    userLogin: false,
@@ -10,7 +10,7 @@ const initialState = {
 function rootReducer(state = initialState, action){
    console.log("action =", action);
 
-   if(action.type === ADD_TASK){
+   if(action.type === NEW_TASK_REQUESTED){
       return {
          ...state,
          tasks: [...state.tasks, action.payload],
@@ -24,6 +24,22 @@ function rootReducer(state = initialState, action){
          toastMessage: "Found bad words"
       }
    };
+
+   if(action.type === 'LOGIN_SUCCESS'){
+      console.log('action after login reducer =', action)
+      return{
+         ...state,
+         userObj : action
+      }
+   };
+   
+   if(action.type === "TASK_LIST_RECEIVED"){
+      return {
+         ...state,
+         tasks: action.payload,
+         toastMessage: "Tasks fetched Successfully"
+      }
+   }
 
    if(action.type === DATA_LOADED){
       return {

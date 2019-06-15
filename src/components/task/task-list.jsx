@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {getTasks} from "../redux-store/actions/root-actions";
+import {getTasksActionHandler} from "../../redux-store/actions/task-actions";
 
 class TaskList extends Component {
-   constructor(){
-      super();
-   }
-
+  
    componentDidMount(){
-      this.props.getTasks();
+      this.props.getTasksActionHandler();
       console.log('toast messgae=', this.props.message);
    }
 
    render() { 
-      console.log('length =', this.props.taskList[0]);
       console.log('task list =', this.props.taskList);
+      // const {tasks = []} = this.props.taskList; // Default empty array if the tasks are empty
       return (
+         
          <div>
             <h1>Task List</h1>
             <ul>
@@ -37,4 +35,4 @@ function mapStateToProps(state) {
    };
  }
  
-export default connect(mapStateToProps, {getTasks})(TaskList);
+export default connect(mapStateToProps, {getTasksActionHandler})(TaskList);

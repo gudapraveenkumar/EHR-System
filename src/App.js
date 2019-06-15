@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import {Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 
-import HomePage from "../src/components/home";
-import Authorization from './components/auth';
+import AppNavBar from "../src/components/commons/navbar";
+import Login from './components/auth/login';
 import UserDashboard from "./components/user-dashboard";
-import NewTask from './components/new-task';
-import TaskList from './components/task-list';
+import NewTask from './components/task/new-task';
+import TaskList from './components/task/task-list';
+import Registration from './components/auth/registration';
+
 
 function App() {
   const bodyContainer = {
@@ -15,13 +17,16 @@ function App() {
  };
   return (
     <React.Fragment>
+      <AppNavBar />
       <div style={bodyContainer} className="container-fluid">
-        <Route path="/home" component = {HomePage}/>
-        <Route path="/authorization" component = {Authorization}/>
-        <Route path="/userDashboard" component = {UserDashboard} />
-        <Route path="/newTask" component = {NewTask} />
-        <Route path="/taskList" component = {TaskList} />
-        <Route path="/" exact component = {HomePage}/>
+        <Switch>
+          <Route path="/login" component = {Login}/>
+          <Route path="/register" component = {Registration}/>
+          <Route path="/userDashboard" component = {UserDashboard} />
+          <Route path="/newTask" component = {NewTask} />
+          <Route path="/taskList" component = {TaskList} />
+          <Route path="/" exact component = {Login}/>
+        </Switch>
       </div>
       
     </React.Fragment>

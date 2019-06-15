@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {addTask} from "../redux-store/actions/root-actions";
+import {addTask} from "../../redux-store/actions/task-actions";
 import { Link } from 'react-router-dom';
 
 

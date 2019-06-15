@@ -1,6 +1,21 @@
-export const ADD_TASK = "ADD_TASK";
-export const LOGIN = "LOGIN";
-export const SIGN_UP = "SIGN_UP";
 export const FOUND_BAD_WORD = "FOUND_BAD_WORD";
 export const DATA_LOADED = "DATA_LOADED";
+
+
+// Auth Action Types
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+
+// Task Action Types
+export const NEW_TASK_REQUESTED = "NEW_TASK_REQUESTED";
+export const TASK_LIST_REQUESTED = "TASK_LIST_REQUESTED";
+export const TASK_DETAILS_REQUESTED = "TASK_DETAILS_REQUESTED";
+export const TASK_UPDATE_REQUESTED = "TASK_UPDATE_REQUESTED";
+export const TASK_DELETE_REQUESTED = "TASK_DELETE_REQUESTED";
+
+// Api action Types
 export const API_ERRORED = "API_ERRORED";
+
