@@ -1,36 +1,52 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-import {addTask} from "../../redux-store/actions/task-actions";
-import { Link } from 'react-router-dom';
-
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 class NewTask extends Component {
    state = { 
-      title: ""
+      data:{
+         title: '',
+         completed: true
+      }
+     
+    }
+
+    handleChange = ({currentTarget: input}) =>{
+      const data = {...this.state.data};
+      data[input.name] = input.value;
+      this.setState({data});
     };
 
-   componentDidMount(){
-      const task = {
-         title: "Finish the task"
-      }
-      this.props.addTask(task);
-   }
+    cancel = () =>{
+       this.props.onCancel();
+    }
 
    render() { 
       return ( 
          <div>
-         <h1>New Task</h1>
-         <Link to="/userDashboard">Back To Dashboard</Link>
+            <Form onSubmit={this.handleLoginSubmit}>
+               <Row className="align-middle">
+                  <Col md="auto">
+                     <h5>New Tasks</h5>
+                  </Col>
+                  <Col >
+                     <Form.Group controlId="formBasicEmail">
+                       
+                        <Form.Control type="text" value={this.state.data.title} name="title" onChange={this.handleChange} placeholder="Enter Title" />
+                     </Form.Group>
+                  </Col>
+                  <Col xs={5} sm={5} md={3}>
+                     <Button variant="danger" onClick={this.cancel}>Cancel</Button>
+                     <Button variant="success" style={{marginLeft:'10px'}}>Save</Button>
+                  </Col>
+               </Row>
+               
+            </Form>
          </div>
-         
        );
    }
-};
-
-const mapDispatchToProps = dispatch => {
-   return {
-      addTask: task=> dispatch(addTask(task))
-   }
-};
+}
  
-export default connect(null, mapDispatchToProps)(NewTask);
+export default NewTask;

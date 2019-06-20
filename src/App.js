@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 
 import AppNavBar from "../src/components/commons/navbar";
 import Login from './components/auth/login';
-import NewTask from './components/task/new-task';
 import TaskList from './components/task/task-list';
 import Registration from './components/auth/registration';
 import ProtectedRoute from './components/commons/protectedRoute';
@@ -28,7 +27,6 @@ class App extends Component {
           <Route path="/login" component = {Login}/>
           <Route path="/logout" component = {Logout}/>
           <Route path="/register" component = {Registration}/>
-          <ProtectedRoute path="/newTask" component = {NewTask} />
           <ProtectedRoute path="/taskList" component = {TaskList} />
           <Route path="/" exact component = {Login}/>
         </Switch>
