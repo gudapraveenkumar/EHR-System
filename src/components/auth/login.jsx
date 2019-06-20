@@ -10,7 +10,6 @@ import Col from 'react-bootstrap/Col';
 import { Link, Redirect } from 'react-router-dom';
 
 
-
 class Login extends Component {
    state = { 
       loginData:{
@@ -35,13 +34,15 @@ class Login extends Component {
     };
    
    render() { 
-      // if(this.state.redirect){
-      //    return <Redirect to="/taskList" />
-      // };
+      if(this.state.userObj){
+         return <Redirect to="/taskList" />
+      };
       
       const {username, password} = this.state.loginData;
       return ( 
+      
         <Container>
+           <br></br>
            <Row className="justify-content-center">
               <Col xs={10} sm={8} md={5}>
                   <Card>

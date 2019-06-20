@@ -1,30 +1,54 @@
-import {LOGIN_REQUEST, SIGNUP_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST} from "./action-types";
+import * as actionTypes from "./action-types";
 
 export function loginActionHandler(userData, ownProps){
    return{
-      type: LOGIN_REQUEST,
+      type: actionTypes.LOGIN_REQUEST,
       data: userData,
       ownProps: ownProps
    };
 };
 
-export function signupActionHandler(userData){
+export function signupActionHandler(userData, ownProps){
    return{
-      type: SIGNUP_REQUEST,
-      data: userData
+      type: actionTypes.SIGNUP_REQUEST,
+      data: userData,
+      ownProps: ownProps
    };
 };
 
-
-export function loginSuccessHandler(userData){
+export function loginSuccessHandler(data){
+   localStorage.setItem('token', data.token);
+   localStorage.setItem('userObj', JSON.stringify(data.user))
    return{
-      type: LOGIN_SUCCESS,
-      data: userData
+      type: actionTypes.LOGIN_SUCCESS,
+      payload: data.user
    };
 };
 
 export function logoutActionHandler(){
+   localStorage.removeItem('token');
+   localStorage.removeItem('userObj');
+  
    return{
-      type: LOGOUT_REQUEST
+      type: actionTypes.LOGOUT_REQUEST,
+      payload: null
    };
+};
+
+export function checkUserLogin(){
+   const data = {
+      user: JSON.parse(localStorage.getItem('userObj')),
+      token: localStorage.getItem('token')
+   }
+   if(data.token && data.user){
+      return{
+         type: actionTypes.LOGIN_SUCCESS,
+         payload: data.user
+      };
+   }else{
+      return{
+         type: actionTypes.LOGOUT_SUCCESS,
+         payload: null
+      };
+   }
 };

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 class UserDashboard extends Component {
    
    componentDidMount(){
-      console.log('Props =', this.props);
+      console.log('Props in dashboard =', this.props);
    }
 
    render() { 

@@ -27,7 +27,7 @@ class Registration extends Component {
 
     handleRegisterSubmit = e =>{
       e.preventDefault();
-      this.props.onRegister(this.state.signupData);
+      this.props.onRegister(this.state.signupData, this.props);
     };
 
    render() { 
@@ -77,7 +77,7 @@ class Registration extends Component {
 
 const mapsDispatchToProps = dispatch =>{
    return{
-      onRegister: (signupData) => dispatch(signupActionHandler(signupData))
+      onRegister: (signupData, ownProps) => dispatch(signupActionHandler(signupData, ownProps))
    }
 };
  

@@ -2,12 +2,18 @@ export const FOUND_BAD_WORD = "FOUND_BAD_WORD";
 export const DATA_LOADED = "DATA_LOADED";
 
 
-// Auth Action Types
+// Login Logout Action Types
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
+export const SET_USER_OBJECT = "SET_USER_OBJECT";
+
+// Signup Action Types
+export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_ERROR = "SIGNUP_ERROR";
 
 // Task Action Types
 export const NEW_TASK_REQUESTED = "NEW_TASK_REQUESTED";

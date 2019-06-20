@@ -6,23 +6,22 @@ class TaskList extends Component {
   
    componentDidMount(){
       this.props.getTasksActionHandler();
-      console.log('toast messgae=', this.props.message);
    }
 
    render() { 
-      console.log('task list =', this.props.taskList);
+      // console.log('task list =', this.props.taskList);
       // const {tasks = []} = this.props.taskList; // Default empty array if the tasks are empty
       return (
          
          <div>
             <h1>Task List</h1>
-            <ul>
+            {/* <ul>
                {this.props.taskList.map(el => (
                   <li className="list-group-item" key={el.id}>
                      {el.title}
                   </li>
                ))}
-            </ul>          
+            </ul>           */}
          </div>
       )
    }

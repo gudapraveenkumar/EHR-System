@@ -1,36 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import {Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
 
 import AppNavBar from "../src/components/commons/navbar";
 import Login from './components/auth/login';
-import UserDashboard from "./components/user-dashboard";
 import NewTask from './components/task/new-task';
 import TaskList from './components/task/task-list';
 import Registration from './components/auth/registration';
+import ProtectedRoute from './components/commons/protectedRoute';
+import Logout from "./components/commons/logout";
+import {checkUserLogin} from "./redux-store/actions/auth-actions";
 
+class App extends Component {
 
-function App() {
-  const bodyContainer = {
-    paddingRight: '0px',
-    paddingLeft: '0px'
- };
-  return (
-    <React.Fragment>
+  componentDidMount(){
+    this.props.checkUserLogin();
+  };
+
+  render() {
+
+    return(
+      <React.Fragment>
       <AppNavBar />
-      <div style={bodyContainer} className="container-fluid">
+      <div style={{paddingRight:'0px', paddingLeft: '0px'}} className="container-fluid">
         <Switch>
           <Route path="/login" component = {Login}/>
+          <Route path="/logout" component = {Logout}/>
           <Route path="/register" component = {Registration}/>
-          <Route path="/userDashboard" component = {UserDashboard} />
-          <Route path="/newTask" component = {NewTask} />
-          <Route path="/taskList" component = {TaskList} />
+          <ProtectedRoute path="/newTask" component = {NewTask} />
+          <ProtectedRoute path="/taskList" component = {TaskList} />
           <Route path="/" exact component = {Login}/>
         </Switch>
       </div>
       
     </React.Fragment>
-  );
+    )
+   
+  }
 }
 
-export default App;
+export default connect(null, {checkUserLogin})(App);

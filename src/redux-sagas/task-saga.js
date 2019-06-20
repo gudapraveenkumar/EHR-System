@@ -19,21 +19,21 @@ export default function* taskSaga(){
    yield takeLatest(TASK_LIST_REQUESTED, getTaskList);
 };
 
-export function* watchAndLogtakeEvery(){
-   yield takeEvery('*', function* logger(action) {
-      const state = yield select()
+// export function* watchAndLogtakeEvery(){
+//    yield takeEvery('*', function* logger(action) {
+//       const state = yield select()
   
-      console.log('action takevery', action);
-      console.log('state after takevery', state);
-    })
-};
+//       console.log('action takevery', action);
+//       console.log('state after takevery', state);
+//     })
+// };
 
-export function* watchAndLogTake() {
-   while (true) {
-     const action = yield take('*')
-     const state = yield select()
+// export function* watchAndLogTake() {
+//    while (true) {
+//      const action = yield take('*')
+//      const state = yield select()
  
-     console.log('action take', action)
-     console.log('state after take', state)
-   }
- }
+//      console.log('action take', action)
+//      console.log('state after take', state)
+//    }
+//  }
