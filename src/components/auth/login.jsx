@@ -15,8 +15,7 @@ class Login extends Component {
       loginData:{
          username: '',
          password: ''
-      },
-      redirect: false
+      }
     }
 
     handleChange = ({currentTarget: input}) =>{
@@ -31,7 +30,7 @@ class Login extends Component {
     };
    
    render() { 
-      if(this.state.userObj){
+      if(this.props.authContainer.userObj){
          return <Redirect to="/taskList" />
       };
       
@@ -81,5 +80,11 @@ const mapDispatchToProps = dispatch =>{
       onLogin: (authData, ownProps) => dispatch(loginActionHandler(authData, ownProps)),
    }
 };
+
+const mapStateToProps = state =>{
+   return{
+      authContainer: state.auth
+   }
+}
  
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
