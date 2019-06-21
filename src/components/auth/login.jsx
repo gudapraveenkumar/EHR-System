@@ -67,7 +67,7 @@ class Login extends Component {
                      </Card.Body>
                   </Card>
                   <div  className="text-center">
-                     Dont have an account <Button variant="link"><Link to="/register">Register</Link></Button>
+                     Don't have an account <Button variant="link"><Link to="/register">Register</Link></Button>
                   </div>
                </Col>
             </Row>
