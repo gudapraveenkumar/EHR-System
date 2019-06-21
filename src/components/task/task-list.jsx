@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {getTasksActionHandler} from "../../redux-store/actions/task-actions";
+import {getTasks} from "../../redux-store/actions/task-actions";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,7 +14,7 @@ class TaskList extends Component {
    }
   
    componentDidMount(){
-      this.props.getTasksActionHandler();
+      this.props.getTasks();
    }
 
    goToNewTask = () =>{
@@ -31,6 +31,7 @@ class TaskList extends Component {
    }
 
    render() { 
+      let tasks = this.props.taskContainer.tasks;
       let heading = (
             <Row>
                <Col>
@@ -44,20 +45,18 @@ class TaskList extends Component {
       if(this.state.newTask){
          heading = <NewTask onCancel={this.handleCancel}/>
       }
-      // console.log('task list =', this.props.taskList);
-      // const {tasks = []} = this.props.taskList; // Default empty array if the tasks are empty
+   
       return (
-         
          <Container>
             
             {heading}
-            {/* <ul>
-               {this.props.taskList.map(el => (
+            <ul>
+               {tasks.map(el => (
                   <li className="list-group-item" key={el.id}>
                      {el.title}
                   </li>
                ))}
-            </ul>           */}
+            </ul>          
          </Container>
       )
    }
@@ -65,9 +64,9 @@ class TaskList extends Component {
 
 function mapStateToProps(state) {
    return {
-     taskList: state.tasks,
+     taskContainer: state.task,
      message: state.toastMessage
    };
  }
  
-export default connect(mapStateToProps, {getTasksActionHandler})(TaskList);
+export default connect(mapStateToProps, {getTasks})(TaskList);

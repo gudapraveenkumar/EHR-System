@@ -5,7 +5,7 @@ import combineReducers from "./reducers/root-reducer";
 // import thunk from "redux-thunk";
 
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "../redux-sagas/root-saga";
+import rootSaga from "./sagas/root-saga";
 
 const initialiseSagaMiddleware = createSagaMiddleware();
 

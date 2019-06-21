@@ -1,30 +1,37 @@
-import {NEW_TASK_REQUESTED, FOUND_BAD_WORD, TASK_LIST_REQUESTED} from "./action-types";
+import * as actionTypes from "./action-types";
 
 export function addTask(data){
    return {
-      type: NEW_TASK_REQUESTED, 
-      taskData: data
+      type: actionTypes.NEW_TASK_REQUESTED, 
+      payload: data
    };
 };
 
+export function taskCreateSuccessfully(data){
+   return {
+      type: actionTypes.NEW_TASK_SUCCESS,
+      payload: data.task
+   }
+}
+
 export function foundBadWords(data){
    return {
-      type: FOUND_BAD_WORD,
+      type: actionTypes.FOUND_BAD_WORD,
       messageData: data
    };
 };
 
 
-export function getTasksActionHandler(){
+export function getTasks(){
    return{
-      type: TASK_LIST_REQUESTED
+      type: actionTypes.GET_TASKS_REQUESTED
    };
 };
 
-export function receiveTasksActionHandler(data){
-   console.log('data in reciev =', data);
+export function getTasksSuccess(data){
+   console.log('tasks in actions =',data);
    return{
-      type: "TASK_LIST_RECEIVED",
-      payload: data
+      type: actionTypes.GET_TASKS_SUCCESS,
+      payload: data.tasks
    };
 };

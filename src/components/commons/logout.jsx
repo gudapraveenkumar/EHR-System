@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {logoutActionHandler} from "../../redux-store/actions/auth-actions";
+
 import {connect} from "react-redux";
 
 class Logout extends Component {
@@ -12,7 +13,7 @@ componentDidMount(){
 
    render() { 
       return (
-         <div>Logou adsft</div>
+         <div></div>
       );
    }
 }

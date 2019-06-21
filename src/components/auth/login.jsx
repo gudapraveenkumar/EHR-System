@@ -28,9 +28,6 @@ class Login extends Component {
     handleLoginSubmit = e =>{
       e.preventDefault();
       this.props.onLogin(this.state.loginData, this.props);
-      let redirect = {...this.state};
-      redirect = true;
-      this.setState({redirect});
     };
    
    render() { 
@@ -81,7 +78,7 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch =>{
    return{
-      onLogin: (authData, ownProps) => dispatch(loginActionHandler(authData, ownProps))
+      onLogin: (authData, ownProps) => dispatch(loginActionHandler(authData, ownProps)),
    }
 };
  

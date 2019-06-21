@@ -1,16 +1,21 @@
 import http from './common-services';
-// import { apiEndpoint } from '../config.json';
+import { apiEndpoint } from '../config.json';
 
-// const apiUrl = `${apiEndpoint}`;
+const apiUrl = `${apiEndpoint}`;
 
 export function fetchTasks(){
-   // const apiData = {
-   //    "email":data.username,
-   //    "password":data.password
-   // }
-   return http.get(`https://jsonplaceholder.typicode.com/posts`);
+   const token = localStorage.getItem('token');
+   http.setJwt(token);
+   return http.get(`${apiUrl}tasks/`);
 };
 
-export default{
-   fetchTasks
+export function saveNewTask(data){
+   const token = localStorage.getItem('token');
+   http.setJwt(token);
+   return http.post(`${apiUrl}tasks/`, data);
 }
+
+export default{
+   fetchTasks,
+   saveNewTask
+};
