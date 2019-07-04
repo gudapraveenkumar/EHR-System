@@ -4,59 +4,83 @@ import {getTasks} from "../../redux-store/actions/task-actions";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import NewTask from './new-task';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class TaskList extends Component {
-
-   state = {
-      newTask: false
-   }
   
    componentDidMount(){
       this.props.getTasks();
    }
 
-   goToNewTask = () =>{
-      let newTask = {...this.state};
-      newTask = true;
-      this.setState({newTask});
-   }
-
-   handleCancel = () =>{
-      console.log('cancel');
-      let newTask = {...this.state};
-      newTask = false;
-      this.setState({newTask});
-   }
-
    render() { 
+      
       let tasks = this.props.taskContainer.tasks;
-      let heading = (
-            <Row>
-               <Col>
-                  <h5>My Tasks</h5>
-               </Col>
-               <Col xs={5} sm={4} md={2}>
-                  <Button onClick={this.goToNewTask} variant="primary">New Task</Button>
-               </Col>
-            </Row>
-      )
-      if(this.state.newTask){
-         heading = <NewTask onCancel={this.handleCancel}/>
-      }
    
       return (
          <Container>
-            
-            {heading}
-            <ul>
-               {tasks.map(el => (
-                  <li className="list-group-item" key={el.id}>
-                     {el.title}
-                  </li>
-               ))}
-            </ul>          
+         
+            <Row>
+               <Col>
+                  <Card style={{'height':'100%'}}>
+                     <Card.Body>
+                        <Card.Title>
+                           New Tasks
+                        </Card.Title>
+                     
+                        <ListGroup>
+                           {tasks.map(el => {
+                              if(el.status === 1){
+                                 return <ListGroup.Item  key={el.id}>
+                                 {el.title}
+                              </ListGroup.Item>
+                              }return ''
+                           })}
+                           
+                           </ListGroup>
+                       
+                     </Card.Body>
+                  </Card>
+               </Col>
+               <Col>
+                  <Card>
+                  <Card.Body>
+                     <Card.Title>
+                        Tasks In Progress
+                     </Card.Title>
+                     <ListGroup>
+                           {tasks.map(el => {
+                              if(el.status === 2){
+                                 return <ListGroup.Item  key={el.id}>
+                                 {el.title}
+                              </ListGroup.Item>
+                              }return ''
+                           })}
+                           
+                           </ListGroup>
+                     </Card.Body>
+                  </Card>
+               </Col>
+               <Col>
+                  <Card>
+                  <Card.Body>
+                     <Card.Title>
+                        Tasks Completed
+                     </Card.Title>
+                     <ListGroup>
+                           {tasks.map(el => {
+                              if(el.status === 3){
+                                 return <ListGroup.Item  key={el.id}>
+                                 {el.title}
+                              </ListGroup.Item>
+                              }return ''
+                           })}
+                           
+                           </ListGroup>
+                     </Card.Body>
+                  </Card>
+               </Col>
+            </Row>       
          </Container>
       )
    }
