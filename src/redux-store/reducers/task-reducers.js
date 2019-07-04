@@ -4,17 +4,28 @@ const initialState = {
    tasks: [],
    error: '',
    apiInProgress: false,
-   newTaskCreated: false
+   newTaskCreated: false,
+   taskUpdated: false,
+   taskDeleted: false,
+   selectedTask: {}
 }
 
 function taskReducer(state = initialState, action){
    // Check for actino
+   // console.log('action =', action);
    switch(action.type){
       case actionTypes.GET_TASKS_SUCCESS:
          return{
             ...state,
             tasks: action.payload
          };
+      
+      case actionTypes.NEW_TASK_REQUESTED:
+         return{
+            ...state,
+            apiInProgress: true,
+            newTaskCreated: false
+         }
       
       case actionTypes.NEW_TASK_SUCCESS:
          return{
@@ -24,11 +35,33 @@ function taskReducer(state = initialState, action){
             newTaskCreated: true
          }
       
-      case actionTypes.NEW_TASK_REQUESTED:
+      case actionTypes.TASK_DETAILS_REQUESTED:
          return{
             ...state,
             apiInProgress: true,
-            newTaskCreated: false
+            selectedTask: {}
+         }
+      
+      case actionTypes.TASK_DETAILS_SUCCESS:
+         console.log('assinging data', action.taskDetails);
+         return{
+            ...state,
+            apiInProgress: false,
+            selectedTask : action.taskDetails
+         }
+      
+      case actionTypes.TASK_DELETE_REQUESTED:
+         return{
+            ...state,
+            apiInProgress: true,
+            taskDeleted: false
+         }
+
+      case actionTypes.TASK_DELETE_SUCCESS:
+         return{
+            ...state,
+            apiInProgress: false,
+            taskDeleted: true
          }
       
       case actionTypes.FOUND_BAD_WORD:

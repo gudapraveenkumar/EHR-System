@@ -26,7 +26,21 @@ function* createNewTask(params){
    } 
 }
 
+function* getTaskDetails(params){
+   console.log('in task details =',params);
+   try{
+      const data = params.payload;
+      const response = yield call(task.fetchTaskById, data);
+      const taskDetails = response.data.task;
+      console.log('response after task details =', taskDetails);
+      yield put({type: actionTypes.TASK_DETAILS_SUCCESS, taskDetails});
+   }catch(error){
+      console.log(error);
+   }
+}
+
 export default function* taskSaga(){
    yield takeLatest(actionTypes.GET_TASKS_REQUESTED, getTaskList);
    yield takeLatest(actionTypes.NEW_TASK_REQUESTED, createNewTask);
+   yield takeLatest(actionTypes.TASK_DETAILS_REQUESTED, getTaskDetails)
 };

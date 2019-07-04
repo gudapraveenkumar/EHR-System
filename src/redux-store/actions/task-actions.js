@@ -35,3 +35,10 @@ export function getTasksSuccess(data){
       payload: data.tasks
    };
 };
+
+export function getTaskDetails(taskId){
+   return{
+      type: actionTypes.TASK_DETAILS_REQUESTED,
+      payload: taskId
+   };
+};

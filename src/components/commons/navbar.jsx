@@ -12,8 +12,6 @@ class AppNavBar extends Component {
       showNewTaskModal: false
    }
 
-
-
    newTaskHandler = () =>{
       console.log('new task');
       let showNewTaskModal = {...this.state};
@@ -30,6 +28,10 @@ class AppNavBar extends Component {
    
    render() { 
       const userObj = this.props.authObj.userObj;
+      let newTaskModel = (<div></div>);
+      if(this.state.showNewTaskModal){
+         newTaskModel = <NewTaskModal show={this.state.showNewTaskModal} onHide={this.closeNewTaskModal}/>
+      }
 
       console.log('nav bar =', this.props);
       return (
@@ -54,7 +56,7 @@ class AppNavBar extends Component {
                  </Row>
               }
          </Navbar>
-         <NewTaskModal show={this.state.showNewTaskModal} onHide={this.closeNewTaskModal}/>
+         {newTaskModel}
          </div>
        );
    }
