@@ -15,7 +15,7 @@ class NewTaskModal extends Component {
    };
 
    abortController = new AbortController();
-   
+
    handleChange = ({currentTarget: input}) =>{
       const data = {...this.state.data};
       data[input.name] = input.value;
@@ -25,20 +25,20 @@ class NewTaskModal extends Component {
    handleNewTaskSubmit = e =>{
       e.preventDefault();
       this.props.saveNewTask(this.state.data);
-      
+      this.props.onHide();
    };
 
    componentWillUnmount(){
       this.abortController.abort()
    }
 
-   render() { 
-      
-      if(this.props.taskContainer.newTaskCreated){
-         this.props.onHide();
-      }
+   render() {
 
-      return ( 
+      // if(this.props.taskContainer.newTaskCreated){
+      //
+      // }
+
+      return (
          <Modal
          onHide = {this.props.onHide}
          show = {this.props.show}
@@ -68,13 +68,13 @@ class NewTaskModal extends Component {
                   Save
                   </Button>
                </Modal.Footer>
-            
+
             </Form>
          </Modal>
        );
    }
 }
- 
+
 
 const mapDispatchToProps = dispatch =>{
    return{
@@ -87,5 +87,5 @@ const mapStateToProps = state =>{
       taskContainer: state.task
    }
 }
- 
+
 export default connect(mapStateToProps, mapDispatchToProps)(NewTaskModal);

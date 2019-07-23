@@ -9,7 +9,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import TaskDetailsModal from './task-details-dialog';
 
 class TaskList extends Component {
-   
+
    state = {
       showTaskDetailsModal: false,
       selectedTaskId: ''
@@ -18,9 +18,11 @@ class TaskList extends Component {
    taskDetailsHandler = (id) =>{
       console.log('task id in list =', id);
       let {showTaskDetailsModal, selectedTaskId} = {...this.state};
-      selectedTaskId = id;
-      showTaskDetailsModal = true;
-      this.setState({showTaskDetailsModal, selectedTaskId});
+
+      // selectedTaskId = id;
+      // showTaskDetailsModal = true;
+
+      this.setState({showTaskDetailsModal:true, selectedTaskId:id});
    }
 
    closeTaskDetailsModal = () =>{
@@ -28,22 +30,21 @@ class TaskList extends Component {
       showTaskDetailsModal = false;
       this.setState({showTaskDetailsModal});
    }
-  
+
    componentDidMount(){
       this.props.getTasks();
    }
 
-   render() { 
-      let taskDetailsModal = (<div></div>)
+   render() {
       let tasks = this.props.taskContainer.tasks;
-      if(this.state.showTaskDetailsModal){
-         taskDetailsModal = <TaskDetailsModal taskId={this.state.selectedTaskId} show={this.state.showTaskDetailsModal} onHide={this.closeTaskDetailsModal}/>
-      }
-     
 
       return (
          <Container>
-            {taskDetailsModal}
+            { this.state.showTaskDetailsModal &&
+               <TaskDetailsModal taskId={this.state.selectedTaskId}
+               show={this.state.showTaskDetailsModal}
+               onHide={this.closeTaskDetailsModal}/>
+            }
             <br></br>
             <Row>
                <Col>
@@ -52,7 +53,7 @@ class TaskList extends Component {
                         <Card.Title>
                            New Tasks
                         </Card.Title>
-                     
+
                         <ListGroup>
                            {tasks.map(el => {
                               if(el.status === 1){
@@ -61,9 +62,9 @@ class TaskList extends Component {
                               </ListGroup.Item>
                               }return ''
                            })}
-                           
+
                            </ListGroup>
-                       
+
                      </Card.Body>
                   </Card>
                </Col>
@@ -81,7 +82,7 @@ class TaskList extends Component {
                               </ListGroup.Item>
                               }return ''
                            })}
-                           
+
                            </ListGroup>
                      </Card.Body>
                   </Card>
@@ -100,12 +101,12 @@ class TaskList extends Component {
                               </ListGroup.Item>
                               }return ''
                            })}
-                           
+
                            </ListGroup>
                      </Card.Body>
                   </Card>
                </Col>
-            </Row>       
+            </Row>
          </Container>
       )
    }
@@ -117,5 +118,5 @@ function mapStateToProps(state) {
      message: state.toastMessage
    };
  }
- 
+
 export default connect(mapStateToProps, {getTasks})(TaskList);

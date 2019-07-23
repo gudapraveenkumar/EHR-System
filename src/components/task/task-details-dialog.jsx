@@ -16,7 +16,7 @@ class TaskDetailsModal extends Component {
    };
 
    async componentDidMount(){
-      
+
       await this.populateTaskDetails();
    }
 
@@ -25,7 +25,7 @@ class TaskDetailsModal extends Component {
          const response = await taskHttpCalls.fetchTaskById(this.props.taskId);
          const data = response.data.task;
          this.setState({data});
-         
+
       }catch(error){
          console.log('error =', error);
       }
@@ -56,7 +56,7 @@ class TaskDetailsModal extends Component {
          console.log('error =', error);
       }
    }
-   
+
    handleChange = ({currentTarget: input}) =>{
       const data = {...this.state.data};
       data[input.name] = input.value;
@@ -64,13 +64,9 @@ class TaskDetailsModal extends Component {
    };
 
 
-   render() { 
-      
-      if(this.props.taskContainer.newTaskCreated){
-         this.props.onHide();
-      }
+   render() {
 
-      return ( 
+      return (
          <Modal
          onHide = {this.props.onHide}
          show = {this.props.show}
@@ -109,13 +105,13 @@ class TaskDetailsModal extends Component {
                      Update
                   </Button>
                </Modal.Footer>
-            
+
             </Form>
          </Modal>
        );
    }
 }
- 
+
 
 const mapDispatchToProps = dispatch =>{
    return{
@@ -128,5 +124,5 @@ const mapStateToProps = state =>{
       taskContainer: state.task
    }
 }
- 
+
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetailsModal);
