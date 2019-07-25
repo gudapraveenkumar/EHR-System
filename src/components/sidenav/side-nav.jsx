@@ -32,6 +32,11 @@ class AppSideNav extends Component {
             route: "/change-password",
             icon: "key"
          },
+         {
+            name: "Logout",
+            route: "/logout",
+            icon: "sign-out-alt"
+         }
       ],
       activeRoute: ''
    };
@@ -64,7 +69,7 @@ class AppSideNav extends Component {
                return <div
                         key={el.name} className={ this.state.activeRoute === el.route ? 'sidenav-item active-route' : 'sidenav-item'}>
                            <Link onClick = {()=> this.sidenavItemHandler(el)} style={{color:'white', textDecoration:'none'}} to={el.route}>
-                              <FontAwesomeIcon style={{margin:'0px 15px'}} icon={el.icon}/>
+                              <FontAwesomeIcon style={{margin:'0px 12px'}} icon={el.icon}/>
                               <span> {el.name} </span>
                            </Link>
                      </div>

@@ -4,7 +4,8 @@ import {
       faTasks,
       faKey,
       faBorderAll,
-      faAlignJustify } from '@fortawesome/free-solid-svg-icons'
+      faAlignJustify,
+      faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import {
       faFile as faFileRegular,
       faCheckSquare as faCheckSquareRegular,
@@ -21,6 +22,7 @@ library.add(
    faTasks,
    faBorderAll,
    faKey,
-   faAlignJustify
+   faAlignJustify,
+   faSignOutAlt
    )
 

@@ -9,7 +9,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./helper/font-awesome-icons";
 
-import AppNavBar from "../src/components/commons/navbar";
 import Login from './components/auth/login';
 import TaskList from './components/task/task-list';
 import Registration from './components/auth/registration';
@@ -18,7 +17,6 @@ import Logout from "./components/commons/logout";
 import {checkUserLogin} from "./redux-store/actions/auth-actions";
 import AppSideNav from './components/sidenav/side-nav';
 import MyCalendar from './components/calendar/my-calendar';
-import AppDragDropDemo from './components/task/task-card';
 
 
 class App extends Component {
@@ -33,16 +31,20 @@ class App extends Component {
       <React.Fragment>
         <div>
           <Row style={{marginLeft:'0px', marginRight:'0px'}}>
-            <Col md="3" style={{paddingLeft:'0px'}}>
-              <AppSideNav/>
-            </Col>
+            {
+                this.props.authContainer.userLogin &&
+                <Col md="2.7" style={{paddingLeft:'0px'}}>
+                  <AppSideNav/>
+                </Col>
+            }
+
             <Col>
             <div style={{paddingRight:'0px', paddingLeft: '0px'}} className="container-fluid">
               <Switch>
                 <Route path="/login" component = {Login}/>
                 <Route path="/logout" component = {Logout}/>
                 <Route path="/register" component = {Registration}/>
-                <ProtectedRoute path="/task-list" component = {AppDragDropDemo} />
+                <ProtectedRoute path="/task-list" component = {TaskList} />
                 <ProtectedRoute path="/my-calendar" component = {MyCalendar}/>
                 <Route path="/" exact component = {Login}/>
               </Switch>
@@ -59,4 +61,8 @@ class App extends Component {
   }
 }
 
-export default connect(null, {checkUserLogin})(App);
+const mapStateToProps = state =>{
+  return { authContainer: state.auth }
+}
+
+export default connect(mapStateToProps, {checkUserLogin})(App);
