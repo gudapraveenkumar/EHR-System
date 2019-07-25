@@ -8,10 +8,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link, Redirect } from 'react-router-dom';
+import LoadingSpinner from "../commons/loading-spinner";
+import { toast } from 'react-toastify';
 
 
 class Login extends Component {
-   state = { 
+   state = {
       loginData:{
          username: '',
          password: ''
@@ -26,17 +28,21 @@ class Login extends Component {
 
     handleLoginSubmit = e =>{
       e.preventDefault();
-      this.props.onLogin(this.state.loginData, this.props);
+      const data = {...this.state.loginData}
+      if(data.username && data.password){
+         this.props.onLogin(this.state.loginData);
+      }else{
+         toast.warn("Please enter details");
+      }
     };
-   
-   render() { 
-      if(this.props.authContainer.userObj){
+
+   render() {
+      if(this.props.authContainer.userLogin){
          return <Redirect to="/taskList" />
       };
-      
+
       const {username, password} = this.state.loginData;
-      return ( 
-      
+      return (
         <Container>
            <br></br>
            <Row className="justify-content-center">
@@ -56,10 +62,14 @@ class Login extends Component {
                                  <Form.Label>Password</Form.Label>
                                  <Form.Control type="password" value={password} name="password" onChange={this.handleChange} placeholder="Password" />
                               </Form.Group>
-                           
+
                               <div style={{textAlign:"right"}}>
                                  <Button variant="link">Forgot Password</Button>
-                                 <Button type="submit" variant="primary">Login</Button>
+
+                                 <Button type="submit" disabled={this.props.authContainer.apiInProgress} variant="primary">
+                                    {this.props.authContainer.apiInProgress && <LoadingSpinner />}
+                                    {!this.props.authContainer.apiInProgress && <span>Login</span>}
+                                 </Button>
                               </div>
                            </Form>
                         </div>
@@ -77,14 +87,12 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch =>{
    return{
-      onLogin: (authData, ownProps) => dispatch(loginActionHandler(authData, ownProps)),
+      onLogin: (authData) => dispatch(loginActionHandler(authData)),
    }
 };
 
 const mapStateToProps = state =>{
-   return{
-      authContainer: state.auth
-   }
+   return { authContainer: state.auth }
 }
- 
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

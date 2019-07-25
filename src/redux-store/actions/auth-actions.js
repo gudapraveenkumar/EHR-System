@@ -1,10 +1,10 @@
 import * as actionTypes from "./action-types";
+import {removeAppData, storeAppData} from "../../helper/manage-storage";
 
-export function loginActionHandler(userData, ownProps){
+export function loginActionHandler(userData){
    return{
       type: actionTypes.LOGIN_REQUEST,
-      data: userData,
-      ownProps: ownProps
+      data: userData
    };
 };
 
@@ -17,8 +17,8 @@ export function signupActionHandler(userData, ownProps){
 };
 
 export function loginSuccessHandler(data){
-   localStorage.setItem('token', data.token);
-   localStorage.setItem('userObj', JSON.stringify(data.user))
+
+   storeAppData(data);
    return{
       type: actionTypes.LOGIN_SUCCESS,
       payload: data.user
@@ -26,9 +26,8 @@ export function loginSuccessHandler(data){
 };
 
 export function logoutActionHandler(){
-   localStorage.removeItem('token');
-   localStorage.removeItem('userObj');
-  
+
+   removeAppData();
    return{
       type: actionTypes.LOGOUT_REQUEST,
       payload: null

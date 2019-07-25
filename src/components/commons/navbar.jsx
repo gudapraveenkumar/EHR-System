@@ -27,7 +27,7 @@ class AppNavBar extends Component {
    }
 
    render() {
-      const userObj = this.props.authObj.userObj;
+      const userLogin = this.props.authObj.userLogin;
       let newTaskModel = (<div></div>);
       if(this.state.showNewTaskModal){
          newTaskModel = <NewTaskModal show={this.state.showNewTaskModal} onHide={this.closeNewTaskModal}/>
@@ -48,7 +48,7 @@ class AppNavBar extends Component {
                <span style={{ marginLeft: '15px'}}>Task Manager</span>
             </Navbar.Brand>
 
-            {userObj &&
+            {userLogin &&
                  <Row>
                      <div className="text-primary" onClick={this.newTaskHandler} style={{cursor:'pointer', marginRight: '15px'}}>New Task</div>
                      {/* <Link style={{textTransform:'capitalize', marginRight: '15px'}} to="/profile">{userObj.username}</Link> */}

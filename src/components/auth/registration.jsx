@@ -6,12 +6,14 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { signupActionHandler } from '../../redux-store/actions/auth-actions';
 import { connect } from 'react-redux';
+import LoadingSpinner from '../commons/loading-spinner';
+import { toast } from 'react-toastify';
 
 class Registration extends Component {
-   state = { 
+   state = {
       signupData:{
          username:'',
          password: '',
@@ -27,12 +29,22 @@ class Registration extends Component {
 
     handleRegisterSubmit = e =>{
       e.preventDefault();
-      this.props.onRegister(this.state.signupData, this.props);
+      const data = {...this.state.signupData}
+      if(data.username && data.password && data.email){
+         this.props.onRegister(this.state.signupData, this.props);
+      }else{
+         toast.warn("Please enter details");
+      }
     };
 
-   render() { 
+   render() {
+
+      if(this.props.authContainer.userSignup){
+         return <Redirect to="/login" />
+      };
+
       const {email, username, password} = this.state.signupData;
-      return ( 
+      return (
          <Container>
             <Row className="justify-content-center">
                <Col xs={10} sm={8} md={5}>
@@ -56,9 +68,12 @@ class Registration extends Component {
                                  <Form.Label>Password</Form.Label>
                                  <Form.Control type="password" value={password} name="password" onChange={this.handleChange} placeholder="Password" />
                               </Form.Group>
-                           
+
                               <div style={{textAlign:"right"}}>
-                                 <Button type="submit" variant="primary">Register</Button>
+                                 <Button type="submit" disabled={this.props.authContainer.apiInProgress} variant="primary">
+                                    {this.props.authContainer.apiInProgress && <LoadingSpinner />}
+                                    {!this.props.authContainer.apiInProgress && <span>Register</span>}
+                                 </Button>
                               </div>
                            </Form>
                         </div>
@@ -67,7 +82,7 @@ class Registration extends Component {
                   <div  className="text-center">
                      Already have an account <Button variant="link"><Link to="/login">Login</Link></Button>
                   </div>
-                           
+
                </Col>
             </Row>
          </Container>
@@ -80,5 +95,9 @@ const mapsDispatchToProps = dispatch =>{
       onRegister: (signupData, ownProps) => dispatch(signupActionHandler(signupData, ownProps))
    }
 };
- 
-export default connect(null, mapsDispatchToProps)(Registration);
+
+const mapStateToProps = state =>{
+   return {authContainer: state.auth}
+}
+
+export default connect(mapStateToProps, mapsDispatchToProps)(Registration);

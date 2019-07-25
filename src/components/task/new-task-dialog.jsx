@@ -34,10 +34,6 @@ class NewTaskModal extends Component {
 
    render() {
 
-      // if(this.props.taskContainer.newTaskCreated){
-      //
-      // }
-
       return (
          <Modal
          onHide = {this.props.onHide}

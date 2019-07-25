@@ -17,9 +17,9 @@ class TaskList extends Component {
 
    taskDetailsHandler = (id) =>{
       console.log('task id in list =', id);
-      let {showTaskDetailsModal, selectedTaskId} = {...this.state};
+      // let {showTaskDetailsModal, selectedTaskId} = {...this.state};
 
-      // selectedTaskId = id;
+      // // selectedTaskId = id;
       // showTaskDetailsModal = true;
 
       this.setState({showTaskDetailsModal:true, selectedTaskId:id});
