@@ -18,6 +18,7 @@ import Logout from "./components/commons/logout";
 import {checkUserLogin} from "./redux-store/actions/auth-actions";
 import AppSideNav from './components/sidenav/side-nav';
 import MyCalendar from './components/calendar/my-calendar';
+import AppDragDropDemo from './components/task/task-card';
 
 
 class App extends Component {
@@ -41,7 +42,7 @@ class App extends Component {
                 <Route path="/login" component = {Login}/>
                 <Route path="/logout" component = {Logout}/>
                 <Route path="/register" component = {Registration}/>
-                <ProtectedRoute path="/task-list" component = {TaskList} />
+                <ProtectedRoute path="/task-list" component = {AppDragDropDemo} />
                 <ProtectedRoute path="/my-calendar" component = {MyCalendar}/>
                 <Route path="/" exact component = {Login}/>
               </Switch>
