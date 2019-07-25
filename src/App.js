@@ -17,6 +17,7 @@ import ProtectedRoute from './components/commons/protectedRoute';
 import Logout from "./components/commons/logout";
 import {checkUserLogin} from "./redux-store/actions/auth-actions";
 import AppSideNav from './components/sidenav/side-nav';
+import MyCalendar from './components/calendar/my-calendar';
 
 
 class App extends Component {
@@ -30,8 +31,8 @@ class App extends Component {
     return(
       <React.Fragment>
         <div>
-          <Row>
-            <Col md="3">
+          <Row style={{marginLeft:'0px', marginRight:'0px'}}>
+            <Col md="3" style={{paddingLeft:'0px'}}>
               <AppSideNav/>
             </Col>
             <Col>
@@ -40,7 +41,8 @@ class App extends Component {
                 <Route path="/login" component = {Login}/>
                 <Route path="/logout" component = {Logout}/>
                 <Route path="/register" component = {Registration}/>
-                <ProtectedRoute path="/taskList" component = {TaskList} />
+                <ProtectedRoute path="/task-list" component = {TaskList} />
+                <ProtectedRoute path="/my-calendar" component = {MyCalendar}/>
                 <Route path="/" exact component = {Login}/>
               </Switch>
             </div>

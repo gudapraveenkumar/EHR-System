@@ -38,7 +38,7 @@ class Login extends Component {
 
    render() {
       if(this.props.authContainer.userLogin){
-         return <Redirect to="/taskList" />
+         return <Redirect to="/task-list" />
       };
 
       const {username, password} = this.state.loginData;
