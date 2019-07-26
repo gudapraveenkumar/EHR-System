@@ -49,7 +49,7 @@ class TaskDetailsModal extends Component {
             'status': parseInt(this.state.data.status)
          };
          const response = await taskHttpCalls.updateTask(this.props.taskId, data);
-         console.log('response after updating task =', response);
+         console.log('response after updating task debba=', response);
          this.props.getTasks();
          this.props.onHide();
       }catch(error){

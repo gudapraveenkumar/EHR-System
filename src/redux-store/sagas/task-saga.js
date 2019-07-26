@@ -2,7 +2,7 @@ import { call, put, takeLatest} from "redux-saga/effects";
 import * as actionTypes from "../actions/action-types";
 import task from "../../http-services/task-services";
 import {getTasksSuccess, taskCreateSuccessfully} from "../actions/task-actions";
-
+import { toast } from "react-toastify";
 
 function* getTaskList(){
    try{
@@ -19,12 +19,14 @@ function* createNewTask(params){
       const data = params.payload;
       const response = yield call(task.saveNewTask, data);
       yield put(taskCreateSuccessfully(response.data)); // Dispatches the action
-   } 
+      toast.success("Task created Successfully! ")
+   }
    catch(error){
+      toast.error("Something Went Wrong, Please Try Again ")
       console.log(error);
       // yield put({type: actionTypes.SIGNUP_ERROR, error})
-   } 
-}
+   }
+};
 
 function* getTaskDetails(params){
    console.log('in task details =',params);

@@ -32,12 +32,17 @@ export function deleteTask(id){
    console.log('in task delete =', id);
    setToken();
    return http.delete(`${apiUrl}tasks/${id}`);
-}
+};
+
+export function fetchTaskPriorities(){
+   return http.get(`${apiUrl}priorities/`);
+};
 
 export default{
    fetchTasks,
    saveNewTask,
    fetchTaskById,
    deleteTask,
-   updateTask
+   updateTask,
+   fetchTaskPriorities
 };

@@ -1,107 +1,52 @@
 import React, { Component } from 'react';
+import TaskDetailsModal from './task-details-dialog';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default class AppDragDropDemo extends Component {
-
+class TaskCard extends Component {
    state = {
-      tasks: [{name:"Learn Angular",
-               category:"new",
-               bgcolor: "yellow"},
-
-              {name:"React",
-               category:"wip",
-               bgcolor:"pink"},
-
-              {name:"Vue",
-               category:"complete",
-               bgcolor:"skyblue"},
-
-               {name:"typescript",
-               category:"new",
-               bgcolor: "yellow"},
-
-              {name:"Bootstrap",
-               category:"wip",
-               bgcolor:"pink"},
-
-              {name:"Native",
-               category:"complete",
-               bgcolor:"skyblue"}
-        ]};
-
-   onDragOver = (ev) =>{
-      ev.preventDefault();
-   };
-
-   onDragStart = (ev, name) => {
-      console.log("dragstart :", name);
-      ev.dataTransfer.setData("id", name);
-   };
-
-   onDrop = (ev, cat) => {
-      let id = ev.dataTransfer.getData("id");
-
-      let tasks = this.state.tasks.filter((task) =>{
-         if(task.name === id){
-            task.category = cat;
-         }
-         return task;
-      });
-      this.setState({
-         ...this.state,
-         tasks
-      });
+      showTaskDetailsModal: false,
+      selectedTask: {}
    }
 
-  render () {
+   taskDetailsHandler = (task) =>{
+      this.setState({showTaskDetailsModal:true, selectedTask:task});
+   };
 
-   var tasks = {
-      wip: [],
-      complete: [],
-      new: []
+   closeTaskDetailsModal = () =>{
+      this.setState({showTaskDetailsModal:false, selectedTask:{}});
+   };
+
+
+   render() {
+      const task = this.props.task;
+      let chipClass = task.priority.name === 'Low'? 'lowp-clr': (task.priority.name === 'Medium'? 'mediump-clr':'highp-clr');
+      const chipClassName = 'priority-chip ' + chipClass;
+
+      return (
+         <React.Fragment>
+             { this.state.showTaskDetailsModal &&
+               <TaskDetailsModal taskId={this.state.selectedTask.id}
+               show={this.state.showTaskDetailsModal}
+               onHide={this.closeTaskDetailsModal}/>
+            }
+
+            <div className="task-card"
+               draggable
+               onClick = {() => this.taskDetailsHandler(task)}
+               onDragStart={(e) => this.props.onDragStart(task)}
+               >
+               {task.title}
+               <Row style={{marginTop:'4px'}}>
+                  <Col><div className={chipClassName}>
+                     {task.priority.name}</div>
+                  </Col>
+               </Row>
+
+            </div>
+         </React.Fragment>
+       );
    }
-
-   this.state.tasks.forEach ((t) => {
-      tasks[t.category].push(<div
-        key={t.name}
-        onDragStart={(e)=>this.onDragStart(e, t.name)}
-        draggable
-        className="draggable"
-        style={{backgroundColor: t.bgcolor}}>
-           {t.name}
-      </div>);
-    });
-
-    return (
-      <div className="container-drag">
-         <h2 className="header"> DRAG and DROP</h2>
-         <Row>
-            <Col style={{background:'lightgrey', height: '400px'}}  onDragOver= {(e)=>this.onDragOver(e)}
-               onDrop= {(e) => this.onDrop(e, "new")}>
-               <div className="new">
-                  <span className="task-header">NEW</span>
-                  {tasks.new}
-               </div>
-            </Col>
-
-            <Col style={{background:'lightgreen', height: '400px'}}  onDragOver= {(e)=>this.onDragOver(e)}
-               onDrop= {(e) => this.onDrop(e, "wip")}>
-               <div className="wip">
-                  <span className="task-header">WIP</span>
-                  {tasks.wip}
-               </div>
-            </Col>
-
-            <Col style={{background:'cyan', height: '400px'}}  onDragOver= {(e)=>this.onDragOver(e)}
-                onDrop= {(e) => this.onDrop(e, "complete")}>
-               <div className="completed">
-                  <span className="task-header">COMPLETED</span>
-                  {tasks.complete}
-               </div>
-            </Col>
-         </Row>
-      </div>
-    );
-  }
 }
+
+export default TaskCard;

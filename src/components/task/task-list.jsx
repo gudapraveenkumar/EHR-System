@@ -3,32 +3,24 @@ import {connect} from "react-redux";
 import {getTasks} from "../../redux-store/actions/task-actions";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import TaskDetailsModal from './task-details-dialog';
 import './task.scss';
+import NewTaskModal from './new-task-dialog';
+import TaskCard from './task-card';
 import taskHttpCalls from "../../http-services/task-services";
 
 
 class TaskList extends Component {
 
    state = {
-      showTaskDetailsModal: false,
-      selectedTaskId: '',
       selectedTask: {}
    }
 
-   taskDetailsHandler = (id) =>{
-      console.log('task id in list =', id);
-      this.setState({showTaskDetailsModal:true, selectedTaskId:id});
-   };
-
-   closeTaskDetailsModal = () =>{
-      let showTaskDetailsModal = {...this.state};
-      showTaskDetailsModal = false;
-      this.setState({showTaskDetailsModal});
-   };
-
    componentDidMount(){
       this.props.getTasks();
+   };
+
+   onDragOver = (ev) =>{
+      ev.preventDefault();
    };
 
    updateTaskHandler = async (task) =>{
@@ -41,19 +33,13 @@ class TaskList extends Component {
       }
    }
 
-   onDragOver = (ev) =>{
-      ev.preventDefault();
-   };
-
-   onDragStart = (ev, task) => {
-      ev.dataTransfer.setData("id", task.id);
+   onDragStart = (task) => {
       let selectedTask = {...this.state.selectedTask};
       selectedTask = task;
       this.setState({selectedTask});
    };
 
-   onDrop = (ev, status) => {
-      // let id = ev.dataTransfer.getData("id");
+   onDrop = (status) => {
       let task = {...this.state.selectedTask};
       task.status = status;
       this.updateTaskHandler(task);
@@ -61,83 +47,59 @@ class TaskList extends Component {
    }
 
    render() {
-       let tasks = this.props.taskContainer.tasks;
+      let tasks = {
+         Backlog: [],
+         InProgress: [],
+         Completed: []
+      }
+      this.props.taskContainer.tasks.forEach ((item) => {
+            tasks[item.status.name].push(item);
+      });
 
       return (
          <div>
-            { this.state.showTaskDetailsModal &&
-               <TaskDetailsModal taskId={this.state.selectedTaskId}
-               show={this.state.showTaskDetailsModal}
-               onHide={this.closeTaskDetailsModal}/>
-            }
-
             <Row style={{margin:'15px 0px'}}>
                <Col><h4>My Tasks</h4></Col>
                <Col md="auto">
-                  <div className="new-task-btn">
-                     New Task
-                  </div>
+                  <NewTaskModal />
                </Col>
             </Row>
 
             <Row>
-               <Col onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(e, 1)}>
-                  <div style={{border: '1px solid lightgrey', padding:'15px 10px', borderRadius: '4px'}}>
-                     <h5>New</h5>
-                        {tasks.map(el => {
-                           if(el.status === 1){
+               <Col onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(1)}>
+                  <div className="task-columns">
+                     <h5>Backlog</h5>
+                        {tasks.Backlog.map(el => {
                               return (
-                                 <div className="task-card"
-                                    onDragStart={(e)=>this.onDragStart(e, el)}
-                                    draggable
-                                    onClick={() => this.taskDetailsHandler(el.id)} key={el.id}
-                                    >
-                                       {el.title}
-                                 </div>
+                                <TaskCard key={el.id} task={el} onDragStart={this.onDragStart}/>
                               )
-                           }return ''
-                        })}
+                           }
+                        )}
                   </div>
                </Col>
 
-               <Col onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(e, 2)} style={{padding: '0px 8px'}}>
-                  <div style={{border: '1px solid lightgrey', padding:'15px 10px', borderRadius: '4px'}}>
+               <Col  onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(2)} style={{padding: '0px 8px'}}>
+                  <div className="task-columns">
                      <h5>In Progress</h5>
-                        {tasks.map(el => {
-                           if(el.status === 2){
+                        {tasks.InProgress.map(el => {
                               return (
-                                 <div className="task-card"
-                                    onDragStart={(e)=>this.onDragStart(e, el)}
-                                    draggable
-                                    onClick={() => this.taskDetailsHandler(el.id)} key={el.id}
-                                    >
-                                       {el.title}
-                                 </div>
+                                <TaskCard key={el.id} task={el} onDragStart={this.onDragStart}/>
                               )
-                           }return ''
-                        })}
+                           }
+                        )}
                   </div>
-
                </Col>
 
-               <Col onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(e, 3)}>
-                  <div style={{border: '1px solid lightgrey', padding:'15px 10px', borderRadius: '4px'}}>
-                     <h5>Complete</h5>
-                        {tasks.map(el => {
-                           if(el.status === 3){
+               <Col onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(3)}>
+                  <div className="task-columns">
+                     <h5>Completed</h5>
+                        {tasks.Completed.map(el => {
                               return (
-                                 <div className="task-card"
-                                    onDragStart={(e)=>this.onDragStart(e, el)}
-                                    draggable
-                                    onClick={() => this.taskDetailsHandler(el.id)} key={el.id}
-                                    >
-                                       {el.title}
-                                 </div>
+                              <TaskCard key={el.id} task={el} onDragStart={this.onDragStart}/>
                               )
-                           }return ''
-                        })}
+                           }
+                        )}
                   </div>
-
                </Col>
             </Row>
          </div>
