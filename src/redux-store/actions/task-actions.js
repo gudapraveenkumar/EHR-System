@@ -2,7 +2,7 @@ import * as actionTypes from "./action-types";
 
 export function addTask(data){
    return {
-      type: actionTypes.NEW_TASK_REQUESTED, 
+      type: actionTypes.NEW_TASK_REQUESTED,
       payload: data
    };
 };

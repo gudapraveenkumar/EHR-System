@@ -11,21 +11,30 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 class NewTaskModal extends Component {
-   state = {
-      data:{
-         title: '',
-         description: '',
-         start: new Date(),
-         end: new Date(),
-         priority: {}
-      },
-      taskPriorities:[],
-      openModal: false
-   };
+
+   constructor(props) {
+      super(props);
+      this.state = {
+        data:{
+            title:'',
+            description:'',
+            priority_id: 1,
+            status_id: 1,
+            start: new Date(),
+            end: new Date()
+         },
+         taskPriorities:[],
+         taskStatuses: [],
+         openModal: false
+      };
+      this.handleDateChange = this.handleDateChange.bind(this);
+    }
+
 
    async componentDidMount(){
-      const {data} = await taskHttpCalls.fetchTaskPriorities();
-      this.setState({taskPriorities: data.tasks});
+      const {data: priorities} = await taskHttpCalls.fetchTaskPriorities();
+      const {data: statuses} = await taskHttpCalls.fetchTaskStatuses();
+      this.setState({taskPriorities: priorities.tasks, taskStatuses: statuses.tasks});
    }
 
    newTaskHandler = () =>{
@@ -44,7 +53,17 @@ class NewTaskModal extends Component {
 
    handleChange = ({currentTarget: input}) =>{
       const data = {...this.state.data};
-      data[input.name] = input.value;
+      if(input.name === 'priority_id' || input.name === 'status_id'){
+         data[input.name] = parseInt(input.value);
+      }else{
+         data[input.name] = input.value;
+      }
+      this.setState({data});
+   };
+
+   handleDateChange = (date, key) =>{
+      const data = {...this.state.data};
+      data[key] = date;
       this.setState({data});
    };
 
@@ -59,7 +78,6 @@ class NewTaskModal extends Component {
    };
 
    render() {
-
 
       return (
          <React.Fragment>
@@ -99,15 +117,18 @@ class NewTaskModal extends Component {
                      <Form.Group controlId="taskDescription">
                         <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea"
-                        placeholder="Enter Description" rows="3" />
+                        placeholder= "Enter Description"
+                        name= "description"
+                        onChange={this.handleChange}
+                        value={this.state.data.description} rows="2" />
                      </Form.Group>
 
                      <Form.Row>
                         <Form.Group as={Col} controlId="startDate">
                            <div style={{marginBottom:'10px'}}>Start Date</div>
                            <DatePicker
-                              selected={this.state.data.start}
-                              onChange={this.handleChange}
+                              selected= {this.state.data.start}
+                              onChange= {(e) => this.handleDateChange(e,'start')}
                            />
                         </Form.Group>
 
@@ -116,31 +137,56 @@ class NewTaskModal extends Component {
                            <DatePicker
                               style={{padding: '4px'}}
                               selected={this.state.data.end}
-                              onChange={this.handleChange}
+                              onChange= {(e) => this.handleDateChange(e, 'end')}
                            />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="priority">
                            <Form.Label>Priority</Form.Label>
-                           <Form.Control as="select">
-                              <option>1</option>
-                              <option>2</option>
+                           <Form.Control as = "select"
+                              onChange = {this.handleChange}
+                              name = "priority_id"
+                              value = {this.state.data.priority_id}>
+                              {
+                                 this.state.taskPriorities.map(item =>{
+                                    return <option key={item.id} value={item.id}>{item.name}</option>
+                                 })
+                              }
                            </Form.Control>
                         </Form.Group>
 
                      </Form.Row>
-                     <Form>
-                        <Row>
-                           <Col>
-                           <Form.Group as={Col} controlId="assignee">
+                     <Form.Row>
+
+                           {/* <Form.Group as={Col} md={3} controlId="assignee">
                               <Form.Label>Assignee</Form.Label>
-                              <Form.Control as="select">
-                                 <option>1</option>
-                                 <option>2</option>
+                              <Form.Control as = "select"
+                                 onChange = {this.handleChange}
+                                 name = "priority"
+                                 value = {this.state.data.priority}>
+                                    {
+                                       this.state.taskPriorities.map(item =>{
+                                          return <option key={item.id} value={item.id}>{item.name}</option>
+                                       })
+                                    }
                               </Form.Control>
+                           </Form.Group> */}
+
+                           <Form.Group as={Col} md={3} style={{marginLeft:'8%'}} controlId="status">
+                              <Form.Label>Status</Form.Label>
+                              <Form.Control as = "select"
+                                 onChange = {this.handleChange}
+                                 name = "status_id"
+                                 value = {this.state.data.status_id}>
+                              {
+                                 this.state.taskStatuses.map(item =>{
+                                    return <option key={item.id} value={item.id}>{item.name}</option>
+                                 })
+                              }
+                           </Form.Control>
                            </Form.Group>
-                           </Col>
-                           <Col>
+
+                           <Col className="d-flex justify-content-end d-flex align-items-center">
                               <Button style={{marginRight: '8px'}} variant="secondary" onClick={this.closeTaskModel}>
                                  Close
                               </Button>
@@ -148,13 +194,8 @@ class NewTaskModal extends Component {
                                  Save
                               </Button>
                            </Col>
-                        </Row>
-
-
-                     </Form>
-
+                     </Form.Row>
                   </Modal.Body>
-
                </Form>
             </Modal>
             }

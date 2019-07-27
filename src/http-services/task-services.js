@@ -38,11 +38,16 @@ export function fetchTaskPriorities(){
    return http.get(`${apiUrl}priorities/`);
 };
 
+export function fetchTaskStatuses(){
+   return http.get(`${apiUrl}statuses/`);
+}
+
 export default{
    fetchTasks,
    saveNewTask,
    fetchTaskById,
    deleteTask,
    updateTask,
-   fetchTaskPriorities
+   fetchTaskPriorities,
+   fetchTaskStatuses
 };

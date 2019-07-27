@@ -12,7 +12,7 @@ import taskHttpCalls from "../../http-services/task-services";
 class TaskList extends Component {
 
    state = {
-      selectedTask: {}
+      selectedTask: {},
    }
 
    componentDidMount(){
