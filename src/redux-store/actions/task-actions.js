@@ -7,38 +7,22 @@ export function addTask(data){
    };
 };
 
-export function taskCreateSuccessfully(data){
-   return {
-      type: actionTypes.NEW_TASK_SUCCESS,
-      payload: data.task
-   }
-}
-
-export function foundBadWords(data){
-   return {
-      type: actionTypes.FOUND_BAD_WORD,
-      messageData: data
-   };
-};
-
-
 export function getTasks(){
    return{
       type: actionTypes.GET_TASKS_REQUESTED
    };
 };
 
-export function getTasksSuccess(data){
-   console.log('tasks in actions =',data);
-   return{
-      type: actionTypes.GET_TASKS_SUCCESS,
-      payload: data.tasks
-   };
+export function updateTask(data, taskId){
+   return {
+      type: actionTypes.TASK_UPDATE_REQUESTED,
+      payload: {data, taskId}
+   }
 };
 
-export function getTaskDetails(taskId){
+export function deleteTask(taskId){
    return{
-      type: actionTypes.TASK_DETAILS_REQUESTED,
+      type: actionTypes.TASK_DELETE_REQUESTED,
       payload: taskId
-   };
+   }
 };

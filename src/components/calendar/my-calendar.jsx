@@ -3,33 +3,28 @@ import {Calendar, momentLocalizer} from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './calendar.scss';
+import {connect} from "react-redux";
+import {getTasks} from "../../redux-store/actions/task-actions";
 
 const localizer = momentLocalizer(moment)
 
 class MyCalendar extends Component {
-   state = {
-      events:[
-         {
-            title: 'Finish',
-            start: new Date(),
-            end: new Date('2019-07-26'),
-            allDay: false
-          },
-          {
-            title: 'test app',
-            start: new Date(),
-            end: new Date('2019-07-26'),
-            allDay: false
-          }
-      ]
-    }
+
+
+   componentDidMount(){
+      console.log('calendar mount =', this.props);
+      if(!this.props.taskContainer.tasks.length){
+        this.props.getTasks();
+      }
+   }
+
    render() {
       return(
          <div style={{height: "80vh", padding:'20px'}} className="calendar-container">
             <h2 style={{textAlign:"center"}}>My Calendar</h2>
            <Calendar style={{marginTop:'30px'}}
              localizer={localizer}
-             events={this.state.events}
+             events={this.props.taskContainer.tasks}
              startAccessor="start"
              endAccessor="end"
             />
@@ -38,4 +33,12 @@ class MyCalendar extends Component {
    }
 }
 
-export default MyCalendar;
+
+function mapStateToProps(state) {
+   return {
+     taskContainer: state.task,
+     message: state.toastMessage
+   };
+ }
+
+export default connect(mapStateToProps, {getTasks})(MyCalendar);

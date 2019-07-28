@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {addTask} from "../../redux-store/actions/task-actions";
+import {addTask, updateTask, deleteTask} from "../../redux-store/actions/task-actions";
 import {connect} from "react-redux";
 import taskHttpCalls from "../../http-services/task-services";
 import Col from 'react-bootstrap/Col';
@@ -50,13 +50,11 @@ class TaskModal extends Component {
    async componentDidMount(){
       const {data: priorities} = await taskHttpCalls.fetchTaskPriorities();
       const {data: statuses} = await taskHttpCalls.fetchTaskStatuses();
-
-
       if(!this.props.isNewTask){
          this.getTaskDetails();
       }
       this.setState({taskPriorities: priorities.tasks, taskStatuses: statuses.tasks});
-   }
+   };
 
    abortController = new AbortController();
 
@@ -76,10 +74,19 @@ class TaskModal extends Component {
       this.setState({data});
    };
 
-   handleNewTaskSubmit = e =>{
+   handleSubmit = e =>{
       e.preventDefault();
-      this.props.saveNewTask(this.state.data);
-      this.closeTaskModel();
+      if(this.props.isNewTask){
+         this.props.saveNewTask(this.state.data);
+      }else{
+         this.props.updateTask(this.state.data, this.props.taskId);
+      }
+      this.props.closeModal();
+   };
+
+   handleDeleteTask =()=>{
+      this.props.deleteTask(this.props.taskId);
+      this.props.closeModal();
    };
 
    componentWillUnmount(){
@@ -190,11 +197,25 @@ class TaskModal extends Component {
                            </Form.Group>
 
                            <Col className="d-flex justify-content-end d-flex align-items-center">
-                              <Button style={{marginRight: '8px'}} variant="secondary" onClick={this.closeTaskModel}>
+                              {this.props.isNewTask &&
+                              <Button style={{marginRight: '8px'}}
+                                 variant="secondary"
+                                 onClick={this.closeTaskModel}>
                                  Close
                               </Button>
-                              <Button variant="success" onClick={this.handleNewTaskSubmit} >
-                                 Save
+                              }
+
+                              {!this.props.isNewTask &&
+                                 <Button style={{marginRight: '8px'}}
+                                    variant="danger"
+                                    onClick={this.handleDeleteTask}>
+                                    Delete
+                                 </Button>
+                              }
+
+                              <Button variant="success" onClick={this.handleSubmit} >
+                                 {this.props.isNewTask && <span>Save</span>}
+                                 {!this.props.isNewTask && <span>Update</span>}
                               </Button>
                            </Col>
                      </Form.Row>
@@ -205,19 +226,21 @@ class TaskModal extends Component {
          </React.Fragment>
        );
    }
-}
+};
 
 
 const mapDispatchToProps = dispatch =>{
    return{
       saveNewTask: (taskData) => dispatch(addTask(taskData)),
+      updateTask: (taskData, taskId) => dispatch(updateTask(taskData, taskId)),
+      deleteTask: (taskId) => dispatch(deleteTask(taskId))
    }
-}
+};
 
 const mapStateToProps = state =>{
    return {
       taskContainer: state.task
    }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskModal);

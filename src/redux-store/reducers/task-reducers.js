@@ -12,7 +12,7 @@ const initialState = {
 
 function taskReducer(state = initialState, action){
    // Check for actino
-   // console.log('action =', action);
+   console.log('action =', action);
    switch(action.type){
       case actionTypes.GET_TASKS_SUCCESS:
          return{

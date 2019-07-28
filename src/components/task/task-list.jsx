@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {getTasks} from "../../redux-store/actions/task-actions";
+import {getTasks, updateTask} from "../../redux-store/actions/task-actions";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './task.scss';
@@ -23,16 +23,6 @@ class TaskList extends Component {
       ev.preventDefault();
    };
 
-   updateTaskHandler = async (task) =>{
-      try{
-         const response = await taskHttpCalls.updateTask(task.id, task);
-         console.log('response after updating task =', response);
-         this.props.getTasks();
-      }catch(error){
-         console.log('error =', error);
-      }
-   }
-
    onDragStart = (task) => {
       let selectedTask = {...this.state.selectedTask};
       selectedTask = task;
@@ -41,8 +31,11 @@ class TaskList extends Component {
 
    onDrop = (status) => {
       let task = {...this.state.selectedTask};
-      task.status = status;
-      this.updateTaskHandler(task);
+      if(task.status.id !== status){
+         task.status_id = status;
+         this.props.updateTask(task, task.id);
+      }
+
    }
 
    render() {
@@ -111,6 +104,13 @@ function mapStateToProps(state) {
      taskContainer: state.task,
      message: state.toastMessage
    };
- }
+}
 
-export default connect(mapStateToProps, {getTasks})(TaskList);
+const mapDispatchToProps = dispatch =>{
+   return{
+      getTasks: () => dispatch(getTasks()),
+      updateTask: (taskData, taskId) => dispatch(updateTask(taskData, taskId)),
+   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

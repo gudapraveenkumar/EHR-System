@@ -24,6 +24,7 @@ export function fetchTaskById(id){
 };
 
 export function updateTask(id, data){
+   console.log('task update =', id, data)
    setToken();
    return http.put(`${apiUrl}tasks/${id}`, data);
 };
