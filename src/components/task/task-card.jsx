@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TaskDetailsModal from './task-details-dialog';
+import TaskModal from './task-modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -26,9 +26,12 @@ class TaskCard extends Component {
       return (
          <React.Fragment>
              { this.state.showTaskDetailsModal &&
-               <TaskDetailsModal taskId={this.state.selectedTask.id}
-               show={this.state.showTaskDetailsModal}
-               onHide={this.closeTaskDetailsModal}/>
+
+               <TaskModal
+                  taskId={this.state.selectedTask.id}
+                  isNewTask={false}
+                  closeModal={this.closeTaskDetailsModal}
+                  openModal={this.state.showTaskDetailsModal}/>
             }
 
             <div className="task-card"

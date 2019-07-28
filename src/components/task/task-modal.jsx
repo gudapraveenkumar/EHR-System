@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-class NewTaskModal extends Component {
+class TaskModal extends Component {
 
    constructor(props) {
       super(props);
@@ -24,30 +24,39 @@ class NewTaskModal extends Component {
             end: new Date()
          },
          taskPriorities:[],
-         taskStatuses: [],
-         openModal: false
+         taskStatuses: []
       };
       this.handleDateChange = this.handleDateChange.bind(this);
-    }
+   }
 
+   getTaskDetails = async () =>{
+      const response = await taskHttpCalls.fetchTaskById(this.props.taskId);
+
+      const taskDetails = {
+         title: response.data.task.title,
+         description: response.data.task.description,
+         priority_id: response.data.task.priority.id,
+         status_id: response.data.task.status.id,
+         start: new Date(response.data.task.start),
+         end: new Date(response.data.task.end)
+      };
+      console.log('task details =', taskDetails);
+      let {data} = {...this.state.data};
+      data = taskDetails;
+      this.setState({data});
+
+   };
 
    async componentDidMount(){
       const {data: priorities} = await taskHttpCalls.fetchTaskPriorities();
       const {data: statuses} = await taskHttpCalls.fetchTaskStatuses();
+
+
+      if(!this.props.isNewTask){
+         this.getTaskDetails();
+      }
       this.setState({taskPriorities: priorities.tasks, taskStatuses: statuses.tasks});
    }
-
-   newTaskHandler = () =>{
-      let openModal = {...this.state.openModal};
-      openModal = true;
-      this.setState({openModal});
-   };
-
-   closeTaskModel = () =>{
-      let openModal = {...this.state.openModal};
-      openModal = false;
-      this.setState({openModal});
-   };
 
    abortController = new AbortController();
 
@@ -81,24 +90,18 @@ class NewTaskModal extends Component {
 
       return (
          <React.Fragment>
-            { !this.state.openModal &&
-               <div onClick={this.newTaskHandler} className="new-task-btn">
-                  New Task
-               </div>
-            }
-            {
-               this.state.openModal &&
-            <Modal
-               onHide = {this.closeTaskModel}
-               show = {this.state.openModal}
-               size="lg"
-               aria-labelledby="contained-modal-title-vcenter"
-               centered
-            >
+
+               <Modal
+                  onHide = {this.props.closeModal}
+                  show = {this.props.openModal}
+                  size="lg"
+                  aria-labelledby="contained-modal-title-vcenter"
+                  centered
+               >
 
                <Modal.Header closeButton>
                      <Modal.Title id="contained-modal-title-vcenter">
-                        New Task
+                        {this.props.isNewTask ? <span>New Task</span> : <span>Task Details</span>}
                      </Modal.Title>
                </Modal.Header>
 
@@ -198,7 +201,7 @@ class NewTaskModal extends Component {
                   </Modal.Body>
                </Form>
             </Modal>
-            }
+
          </React.Fragment>
        );
    }
@@ -217,4 +220,4 @@ const mapStateToProps = state =>{
    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTaskModal);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskModal);

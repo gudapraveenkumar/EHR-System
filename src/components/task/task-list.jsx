@@ -4,9 +4,9 @@ import {getTasks} from "../../redux-store/actions/task-actions";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './task.scss';
-import NewTaskModal from './new-task-dialog';
 import TaskCard from './task-card';
 import taskHttpCalls from "../../http-services/task-services";
+import NewTaskBtn from '../commons/new-task-btn';
 
 
 class TaskList extends Component {
@@ -43,7 +43,6 @@ class TaskList extends Component {
       let task = {...this.state.selectedTask};
       task.status = status;
       this.updateTaskHandler(task);
-
    }
 
    render() {
@@ -61,7 +60,7 @@ class TaskList extends Component {
             <Row style={{margin:'15px 0px'}}>
                <Col><h4>My Tasks</h4></Col>
                <Col md="auto">
-                  <NewTaskModal />
+                  <NewTaskBtn/>
                </Col>
             </Row>
 
