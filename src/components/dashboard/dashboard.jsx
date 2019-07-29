@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card'
 import {getTasks} from "../../redux-store/actions/task-actions";
 import {connect} from "react-redux";
-
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import DashboardCard from './dashboard-cards';
+import '../task/task.scss';
+import './dashboard.scss';
+import DashboardTaskCard from './dashboard-task-card';
 
 class Dashboard extends Component {
 
@@ -16,14 +21,48 @@ class Dashboard extends Component {
       let tasks = this.props.taskContainer.tasks;
 
       return (
-         <div>
-            <Card>
+         <div style={{marginTop:'10px'}}>
+            <Row className="d-flex align-items-center">
+               <Col>
+                  <DashboardCard title= "Today's Tasks" icon={['far', 'calendar']} count="11"/>
+               </Col>
+               <Col>
+                  <DashboardCard title= "Backlog Tasks" icon="clipboard-list" count="05"/>
+               </Col>
+               <Col>
+                  <DashboardCard title= "Tasks InProgress" icon="briefcase" count="12"/>
+               </Col>
+               <Col>
+                  <Card>
+                     <Card.Body style={{padding: '8px 15px 2px 15px'}}>
+                        <div className="priority-task-count">
+                           <div style={{height:'fit-content'}} className="priority-chip lowp-clr">Low</div>
+                           <div>12</div>
+                        </div>
+
+                        <div className="priority-task-count">
+                           <div style={{height:'fit-content'}} className="priority-chip mediump-clr">Medium</div>
+                           <div>12</div>
+                        </div>
+
+                        <div className="priority-task-count" style={{borderBottom:'0px', marginBottom:'0px'}}>
+                           <div style={{height:'fit-content'}} className="priority-chip highp-clr">High</div>
+                           <div>12</div>
+                        </div>
+                     </Card.Body>
+                  </Card>
+               </Col>
+            </Row>
+
+            <Card style={{marginTop:'10px'}}>
                <Card.Header as="h5">Today's Tasks</Card.Header>
                <Card.Body>
-                  {tasks.map(el => {
-                           if(el.status === 2){
+                  {tasks.map(item => {
+                           if(item.status.id === 1){
                               return (
-                                 <div key={el.id}>{el.title}</div>
+                                 <div key={item.id}>
+                                    <DashboardTaskCard task={item}/>
+                                 </div>
                               )
                            }return ''
                         })}
@@ -32,10 +71,12 @@ class Dashboard extends Component {
             <Card style={{marginTop:'10px'}}>
                <Card.Header as="h5">Upcoming Tasks</Card.Header>
                <Card.Body>
-                  {tasks.map(el => {
-                           if(el.status === 2){
+                  {tasks.map(item => {
+                           if(item.status.id === 2){
                               return (
-                                 <div key={el.id}>{el.title}</div>
+                                 <div key={item.id}>
+                                    <DashboardTaskCard task={item}/>
+                                 </div>
                               )
                            }return ''
                         })}

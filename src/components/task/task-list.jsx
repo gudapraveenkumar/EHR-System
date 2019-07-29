@@ -7,6 +7,7 @@ import './task.scss';
 import TaskCard from './task-card';
 import taskHttpCalls from "../../http-services/task-services";
 import NewTaskBtn from '../commons/new-task-btn';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 class TaskList extends Component {
@@ -60,7 +61,7 @@ class TaskList extends Component {
             <Row>
                <Col onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(1)}>
                   <div className="task-columns">
-                     <h5>Backlog</h5>
+                     <h5><FontAwesomeIcon style={{marginRight:'10px'}} icon="clipboard-list"/>Backlog</h5>
                         {tasks.Backlog.map(el => {
                               return (
                                 <TaskCard key={el.id} task={el} onDragStart={this.onDragStart}/>
@@ -72,7 +73,7 @@ class TaskList extends Component {
 
                <Col  onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(2)} style={{padding: '0px 8px'}}>
                   <div className="task-columns">
-                     <h5>In Progress</h5>
+                     <h5> <FontAwesomeIcon style={{marginRight:'10px'}} icon="briefcase"/> In Progress</h5>
                         {tasks.InProgress.map(el => {
                               return (
                                 <TaskCard key={el.id} task={el} onDragStart={this.onDragStart}/>
@@ -84,7 +85,7 @@ class TaskList extends Component {
 
                <Col onDragOver= {(e)=>this.onDragOver(e)} onDrop= {(e) => this.onDrop(3)}>
                   <div className="task-columns">
-                     <h5>Completed</h5>
+                     <h5><FontAwesomeIcon style={{marginRight:'10px'}} icon="check"/>Completed</h5>
                         {tasks.Completed.map(el => {
                               return (
                               <TaskCard key={el.id} task={el} onDragStart={this.onDragStart}/>

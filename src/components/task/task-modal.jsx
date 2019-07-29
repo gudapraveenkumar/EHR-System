@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import Spinner from 'react-bootstrap/Spinner'
+
 
 class TaskModal extends Component {
 
@@ -24,12 +26,16 @@ class TaskModal extends Component {
             end: new Date()
          },
          taskPriorities:[],
-         taskStatuses: []
+         taskStatuses: [],
+         apiInProgress: false
       };
       this.handleDateChange = this.handleDateChange.bind(this);
    }
 
    getTaskDetails = async () =>{
+      let apiInProgress = {...this.state.apiInProgress};
+      apiInProgress = true;
+      this.setState({apiInProgress});
       const response = await taskHttpCalls.fetchTaskById(this.props.taskId);
 
       const taskDetails = {
@@ -40,11 +46,12 @@ class TaskModal extends Component {
          start: new Date(response.data.task.start),
          end: new Date(response.data.task.end)
       };
-      console.log('task details =', taskDetails);
       let {data} = {...this.state.data};
       data = taskDetails;
-      this.setState({data});
-
+      console.log('task details =', taskDetails);
+      apiInProgress = false;
+      this.setState({apiInProgress});
+      this.setState({data, apiInProgress});
    };
 
    async componentDidMount(){
@@ -69,6 +76,7 @@ class TaskModal extends Component {
    };
 
    handleDateChange = (date, key) =>{
+      console.log('date debba =', date);
       const data = {...this.state.data};
       data[key] = date;
       this.setState({data});
@@ -77,6 +85,7 @@ class TaskModal extends Component {
    handleSubmit = e =>{
       e.preventDefault();
       if(this.props.isNewTask){
+         console.log('debba new =', this.state.data);
          this.props.saveNewTask(this.state.data);
       }else{
          this.props.updateTask(this.state.data, this.props.taskId);
@@ -109,6 +118,8 @@ class TaskModal extends Component {
                <Modal.Header closeButton>
                      <Modal.Title id="contained-modal-title-vcenter">
                         {this.props.isNewTask ? <span>New Task</span> : <span>Task Details</span>}
+                        {(this.props.taskContainer.apiInProgress || this.state.apiInProgress) &&
+                        <Spinner style={{marginLeft:'5px'}} animation="border" />}
                      </Modal.Title>
                </Modal.Header>
 
@@ -137,6 +148,7 @@ class TaskModal extends Component {
                         <Form.Group as={Col} controlId="startDate">
                            <div style={{marginBottom:'10px'}}>Start Date</div>
                            <DatePicker
+                              minDate={new Date()}
                               selected= {this.state.data.start}
                               onChange= {(e) => this.handleDateChange(e,'start')}
                            />
@@ -146,6 +158,7 @@ class TaskModal extends Component {
                            <div style={{marginBottom:'10px'}}>End Date</div>
                            <DatePicker
                               style={{padding: '4px'}}
+                              minDate = {this.state.data.start}
                               selected={this.state.data.end}
                               onChange= {(e) => this.handleDateChange(e, 'end')}
                            />

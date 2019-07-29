@@ -19,6 +19,7 @@ function* createNewTask(params){
       const response = yield call(task.saveNewTask, params.payload);
       const taskDetails = response.data.task;
       yield put({type:actionTypes.NEW_TASK_SUCCESS, taskDetails}); // Dispatches the action
+      yield call(getTaskList);
       toast.success("Task created Successfully! ")
    }
    catch(error){
@@ -29,7 +30,7 @@ function* createNewTask(params){
 };
 
 function* updateTask(params){
-   console.log('params =', params);
+
    try{
       const response = yield call(task.updateTask, params.payload.taskId, params.payload.data);
       const taskDetails = response.data.task;
