@@ -38,14 +38,14 @@ class Login extends Component {
 
    render() {
       if(this.props.authContainer.userLogin){
-         return <Redirect to="/task-list" />
+         return <Redirect to="/dashboard" />
       };
 
       const {username, password} = this.state.loginData;
       return (
-        <Container>
+        <Container style={{height:'100vh'}}>
            <br></br>
-           <Row className="justify-content-center">
+           <Row className="d-flex align-items-center justify-content-center">
               <Col xs={10} sm={8} md={5}>
                   <Card>
                      <Card.Body>
