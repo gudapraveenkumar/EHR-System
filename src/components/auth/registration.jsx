@@ -50,7 +50,7 @@ class Registration extends Component {
                <Col xs={10} sm={8} md={5}>
                <Card>
                      <Card.Body>
-                        <Card.Title className="text-center">Register / Signup/ Debba Raju</Card.Title>
+                        <Card.Title className="text-center">Register / Signup/ Debba </Card.Title>
                         <br></br>
                         <div>
                            <Form onSubmit={this.handleRegisterSubmit}>
