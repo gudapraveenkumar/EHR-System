@@ -18,4 +18,4 @@ after_success:
   - git checkout $TRAVIS_BRANCH
   - git branch
   - git merge "$TRAVIS_COMMIT" || exit
-  - git push origin https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager
+  - git push origin https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager master
