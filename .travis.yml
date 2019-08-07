@@ -15,6 +15,7 @@ after_success:
   - git config --global user.email "praveenguda.kumar@gmail.com"
   - git config --global user.name "gudapraveenkumar"
   - git config --list
+  - git fetch
   - git checkout $TRAVIS_PULL_REQUEST_BRANCH
   - git branch
   - git pull
