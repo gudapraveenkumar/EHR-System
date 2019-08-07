@@ -20,7 +20,7 @@ after_success:
   # - git merge "$TRAVIS_COMMIT" || exit
   # - git push --quiet https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager master
   - export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
-  - echo -n $GIT_TAG > public/version
-  - git commit -m "Set build VERSION number" public/version
+  - echo -n $GIT_TAG > build_track/version
+  - git commit -m "Set build VERSION number" build_track/version
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
   - git push --quiet https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager $GIT_TAG > /dev/null 2>&1
