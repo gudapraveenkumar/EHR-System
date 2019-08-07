@@ -25,8 +25,7 @@ function taskReducer(state = initialState, action){
          return{
             ...state,
             apiInProgress: true,
-            newTaskCreated: false,
-            apiInProgress: true
+            newTaskCreated: false
          }
 
       case actionTypes.NEW_TASK_SUCCESS:

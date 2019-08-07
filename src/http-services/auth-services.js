@@ -9,9 +9,9 @@ export function login(data){
 
 export function signup(data){
    return http.post(`${apiUrl}register`, data);
-}
+};
 
 export default{
    login,
    signup
-}
+};

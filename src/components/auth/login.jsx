@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 import { Link, Redirect } from 'react-router-dom';
 import LoadingSpinner from "../commons/loading-spinner";
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 class Login extends Component {
@@ -43,15 +44,14 @@ class Login extends Component {
 
       const {username, password} = this.state.loginData;
       return (
-        <Container style={{height:'100vh'}}>
-           <br></br>
-           <Row className="d-flex align-items-center justify-content-center">
-              <Col xs={10} sm={8} md={5}>
+        <div>
+           <Row style={{height:'100vh',background:'#efefef'}} className="d-flex justify-content-center align-items-center">
+              <Col className="align-self-center" md={5}>
+                  <h2 style={{textAlign:'center'}}><FontAwesomeIcon style={{fontSize:'28px', marginRight:'18px'}} icon="tasks"/>Task Manager</h2>
+                  <br></br>
                   <Card>
                      <Card.Body>
                         <Card.Title className="text-center">Login</Card.Title>
-                        <br></br>
-                        <div>
                            <Form onSubmit={this.handleLoginSubmit}>
                               <Form.Group controlId="formBasicEmail">
                                  <Form.Label>Username</Form.Label>
@@ -72,15 +72,14 @@ class Login extends Component {
                                  </Button>
                               </div>
                            </Form>
-                        </div>
                      </Card.Body>
                   </Card>
-                  <div  className="text-center">
+                  <div className="text-center">
                      Don't have an account <Button variant="link"><Link to="/register">Register</Link></Button>
                   </div>
                </Col>
-            </Row>
-         </Container>
+           </Row>
+         </div>
        );
    }
 };

@@ -1,7 +1,6 @@
 import { call, put, takeLatest} from "redux-saga/effects";
 import * as actionTypes from "../actions/action-types";
 import task from "../../http-services/task-services";
-import {getTasksSuccess, taskCreateSuccessfully} from "../actions/task-actions";
 import { toast } from "react-toastify";
 
 function* getTaskList(){

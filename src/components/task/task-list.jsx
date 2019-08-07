@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './task.scss';
 import TaskCard from './task-card';
-import taskHttpCalls from "../../http-services/task-services";
 import NewTaskBtn from '../commons/new-task-btn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -21,7 +20,7 @@ class TaskList extends Component {
    };
 
    onDragOver = (ev) =>{
-      ev.preventDefault();
+   ev.preventDefault();
    };
 
    onDragStart = (task) => {
