@@ -14,8 +14,13 @@ script:
 after_success:
   - git config --global user.email "praveenguda.kumar@gmail.com"
   - git config --global user.name "gudapraveenkumar"
-  - git config --list
-  - git checkout $TRAVIS_BRANCH
-  - git branch
-  - git merge "$TRAVIS_COMMIT" || exit
-  - git push origin https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager master
+  # - git config --list
+  # - git checkout $TRAVIS_BRANCH
+  # - git branch
+  # - git merge "$TRAVIS_COMMIT" || exit
+  # - git push --quiet https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager master
+  - export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
+  - echo -n $GIT_TAG > public/version
+  - git commit -m "Set build VERSION number" public/version
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+  - git push --quiet https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager $GIT_TAG > /dev/null 2>&1
