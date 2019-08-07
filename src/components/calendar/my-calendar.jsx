@@ -27,7 +27,7 @@ class MyCalendar extends Component {
 
       return(
          <div style={{height: "80vh", padding:'17px'}} className="calendar-container">
-            <h4>My Calendar adsf asdf</h4>
+            <h4>My Calendar adsf</h4>
            <Calendar style = {{marginTop:'20px'}}
              localizer = {localizer}
              events = {events}
