@@ -5,7 +5,7 @@ cache:
   directories:
   - node_modules
 script:
-  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH, TOKEN=$GITHUB_KEY"
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH, TRAVIS_COMMIT=$TRAVIS_COMMIT"
 
   # - npm test
   # - npm run build
@@ -15,11 +15,7 @@ after_success:
   - git config --global user.email "praveenguda.kumar@gmail.com"
   - git config --global user.name "gudapraveenkumar"
   - git config --list
-  - git fetch
-  - git checkout $TRAVIS_PULL_REQUEST_BRANCH
-  - git branch
-  - git pull
   - git checkout $TRAVIS_BRANCH
   - git branch
-  - git merge $TRAVIS_PULL_REQUEST_BRANCH
-  - git push origin $TRAVIS_BRANCH
+  - git merge "$TRAVIS_COMMIT" || exit
+  - git push origin https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager >/dev/null 2>&1
