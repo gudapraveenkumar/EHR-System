@@ -15,8 +15,8 @@ after_success:
   - git config --global user.email "praveenguda.kumar@gmail.com"
   - git config --global user.name "gudapraveenkumar"
   - git config --list
-  - git checkout $TRAVIS_BRANCH
+  - git checkout $TRAVIS_BRANCH || exit
   - git branch
-  - git merge "$TRAVIS_COMMIT" || exit
+  - git merge $TRAVIS_COMMIT || exit
   - git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/gudapraveenkumar/task-manager.git
 
