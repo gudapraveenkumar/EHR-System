@@ -117,7 +117,7 @@ class TaskModal extends Component {
 
                <Modal.Header closeButton>
                      <Modal.Title id="contained-modal-title-vcenter">
-                        {this.props.isNewTask ? <span>New Task</span> : <span>Task Details</span>}
+                        {this.props.isNewTask ? <span>New Task asdf</span> : <span>Task Details</span>}
                         {(this.props.taskContainer.apiInProgress || this.state.apiInProgress) &&
                         <Spinner style={{marginLeft:'5px'}} animation="border" />}
                      </Modal.Title>
