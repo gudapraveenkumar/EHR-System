@@ -18,8 +18,8 @@ upload_files() {
    # git push https://${GITHUB_KEY}@github.com/gudapraveenkumar/task-manager.git
 
    # git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/gudapraveenkumar/task-manager.git
-   git remote add origin https://${GITHUB_KEY}@github.com/gudapraveenkumar/task-manager.git
-   git push origin master
+   git remote add travis-user https://$GITHUB_KEY@github.com/gudapraveenkumar/task-manager.git
+   git push travis-user master
 }
 
 setup_git
