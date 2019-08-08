@@ -51,7 +51,7 @@ class Login extends Component {
                   <br></br>
                   <Card>
                      <Card.Body>
-                        <Card.Title className="text-center">Login / asdfasdf token password</Card.Title>
+                        <Card.Title className="text-center">Login / password</Card.Title>
                            <Form onSubmit={this.handleLoginSubmit}>
                               <Form.Group controlId="formBasicEmail">
                                  <Form.Label>Username</Form.Label>

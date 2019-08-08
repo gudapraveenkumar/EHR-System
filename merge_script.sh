@@ -15,8 +15,8 @@ upload_files() {
   # Remove existing "origin"
   git remote rm origin
   # Add new "origin" with access token in the git URL for authentication
-  git remote add origin https://gudapraveenkumar:${GH_TOKEN}@github.com/gudapraveenkumar/task-manager.git > /dev/null 2>&1
-  git push origin master --quiet
+  git remote add origin https://gudapraveenkumar:${SECURE}@github.com/gudapraveenkumar/task-manager.git > /dev/null 2>&1
+  git push --quiet origin master
 }
 
 # upload_files() {
