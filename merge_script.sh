@@ -12,6 +12,7 @@ commit_website_files() {
 }
 
 upload_files() {
+   git remove -v
    git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/gudapraveenkumar/task-manager.git
    # git remote -v
    # git remote remove origin
