@@ -12,7 +12,7 @@ import {connect} from "react-redux";
 // });
 
 describe("Test App Component", () =>{
-  it("It should render App Component", () =>{
+  it("It should render root Component", () =>{
     expect(1 == 1).toBe(true)
   });
 });
