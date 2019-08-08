@@ -11,12 +11,12 @@ script:
   # - npm run build
   # - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 
-after_success: ./merge_script.sh
-  # - git config --global user.email "praveenguda.kumar@gmail.com"
-  # - git config --global user.name "gudapraveenkumar"
-  # - git config --list
-  # - git checkout $TRAVIS_BRANCH
-  # - git branch
-  # - git merge "$TRAVIS_COMMIT" || exit
-  # - git push origin https://${GITHUB_KEY}@github.com/gudapraveenkumar/task-manager
+after_success:
+  - git config --global user.email "praveenguda.kumar@gmail.com"
+  - git config --global user.name "gudapraveenkumar"
+  - git config --list
+  - git checkout $TRAVIS_BRANCH
+  - git branch
+  - git merge "$TRAVIS_COMMIT" || exit
+  - git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/gudapraveenkumar/task-manager.git
 
