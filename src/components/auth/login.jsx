@@ -51,7 +51,7 @@ class Login extends Component {
                   <br></br>
                   <Card>
                      <Card.Body>
-                        <Card.Title className="text-center">Login / change command </Card.Title>
+                        <Card.Title className="text-center">Login / change asdfas command </Card.Title>
                            <Form onSubmit={this.handleLoginSubmit}>
                               <Form.Group controlId="formBasicEmail">
                                  <Form.Label>Username</Form.Label>

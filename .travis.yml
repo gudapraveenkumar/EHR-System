@@ -1,22 +1,14 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
   - node_modules
 script:
-  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH, TRAVIS_COMMIT=$TRAVIS_COMMIT"
-  - echo GH_TOKEN= 9ac4fe5751919002e3d34103578db6ec4104bcd1 | travis encrypt --add
-  # - npm test
-  # - npm run build
-  # - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+- echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH,
+  TRAVIS_COMMIT=$TRAVIS_COMMIT"
 
-after_success: ./merge_script.sh
-  # - git config --global user.email "praveenguda.kumar@gmail.com"
-  # - git config --global user.name "gudapraveenkumar"
-  # - git config --list
-  # - git checkout $TRAVIS_BRANCH
-  # - git branch
-  # - git merge "$TRAVIS_COMMIT" || exit
-  # - git push origin https://${GITHUB_KEY}@github.com/gudapraveenkumar/task-manager
-
+after_success: "./merge_script.sh"
+env:
+  global:
+    secure: Ca1bylQJ6JTIK3lC8MVVJTMm/FepNDdz6NdjoMBWFn0JgrEQ4uEjgs1uuVRyvvRTYfGSU7O5PQTkbgNgTuIXjzOqYAJQi2YDMXhBouEkZ5qT0pj0GocHnmwTpO6R2Hk8ypLew0CQIQdBZJXYkplsLEm0sjnlKp8zUXun/a9UyxJuthHT4jjhAIbq4/VR7Y7UuPeWYtFmQCnxdks5jKaAakMwgutEWqTEsq7avKakveA0orBnRtOBtUBrMGkQFdKgSMrQbwDp32tZZOYr9NOuwRxLaqs17Mr959i/ni1EnoZEdlDe3UIDhVlgKlm79dowvbKXwD3TDy3APXoboMP6nrRlYRTAYVCBbKwpBuq03pU8fUiJQnTVFXnFuw6zn+yZFu4WW5SblL+lRTZ/HI+t3WBsFh6ONV4Zx3FQKLDVOPxtiNzxjZrZ3cA96/irOrLj6f/WsO1+ymCKxUJrwK3g3IrTH8zwQcvEiYjMPgmIW2hFwtEjFt5PQo2En88QK+4p1XkCMNZ5mOSxqOzMmWH2U86gIxwBxYksc0Y1XRdSq/CSZh1DqnB4OZqbYORW+7ZfR8Tt62EzDOzzl1eT8wlxq0zdaE0FGt1gAWmKwOCUtPTU/lOQTssSHZ8wh5mJx7R5Mzfj3GrJwFqt0OqewCPTinM5iglL740pmA1KRQ0Gi8c=
