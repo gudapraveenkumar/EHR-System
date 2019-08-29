@@ -6,13 +6,15 @@ import Moment from 'react-moment';
 
 class DashboardTaskCard extends Component {
    state = {  }
+
+
    render() {
       const task = this.props.task;
       let chipClass = task.priority.id === 1? 'lowp-clr': (task.priority.id === 2 ? 'mediump-clr':'highp-clr');
       const chipClassName = 'priority-chip ' + chipClass;
       const statusBackground = task.status.id === 1? '#25d2d2': (task.status.id === 2? '#b9a8ef':'');
       return (
-         <div style={{border: '1px solid #e8e8e8', padding:'5px 10px', marginBottom: '10px'}}>
+         <div onClick = {this.props.openTask} style={{border: '1px solid #e8e8e8', padding:'5px 10px', marginBottom: '10px', cursor:'pointer'}}>
             <Row>
                <Col>
                <div>

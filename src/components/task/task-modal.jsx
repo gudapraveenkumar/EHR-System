@@ -178,8 +178,23 @@ class TaskModal extends Component {
                            </Form.Control>
                         </Form.Group>
 
+                        <Form.Group as={Col} controlId="status">
+                              <Form.Label>Status</Form.Label>
+                              <Form.Control as = "select"
+                                 onChange = {this.handleChange}
+                                 name = "status_id"
+                                 value = {this.state.data.status_id}>
+                              {
+                                 this.state.taskStatuses.map(item =>{
+                                    return <option key={item.id} value={item.id}>{item.name}</option>
+                                 })
+                              }
+                              </Form.Control>
+                           </Form.Group>
+
                      </Form.Row>
-                     <Form.Row>
+
+                     <Form.Row className="align-items-center">
 
                            {/* <Form.Group as={Col} md={3} controlId="assignee">
                               <Form.Label>Assignee</Form.Label>
@@ -195,19 +210,7 @@ class TaskModal extends Component {
                               </Form.Control>
                            </Form.Group> */}
 
-                           <Form.Group as={Col} md={3} style={{marginLeft:'8%'}} controlId="status">
-                              <Form.Label>Status</Form.Label>
-                              <Form.Control as = "select"
-                                 onChange = {this.handleChange}
-                                 name = "status_id"
-                                 value = {this.state.data.status_id}>
-                              {
-                                 this.state.taskStatuses.map(item =>{
-                                    return <option key={item.id} value={item.id}>{item.name}</option>
-                                 })
-                              }
-                           </Form.Control>
-                           </Form.Group>
+
 
                            <Col className="d-flex justify-content-end d-flex align-items-center">
                               {this.props.isNewTask &&
