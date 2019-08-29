@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+script:
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH, TRAVIS_COMMIT=$TRAVIS_COMMIT"
+
+  # - npm test
+  # - npm run build
+  # - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+
+after_success: ./merge_script.sh
+  # - git config --global user.email "praveenguda.kumar@gmail.com"
+  # - git config --global user.name "gudapraveenkumar"
+  # - git config --list
+  # - git checkout $TRAVIS_BRANCH
+  # - git branch
+  # - git merge "$TRAVIS_COMMIT" || exit
+  # - git push origin https://${GITHUB_KEY}@github.com/gudapraveenkumar/task-manager
+

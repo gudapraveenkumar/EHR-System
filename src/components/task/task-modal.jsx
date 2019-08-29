@@ -6,7 +6,7 @@ import {addTask, updateTask, deleteTask} from "../../redux-store/actions/task-ac
 import {connect} from "react-redux";
 import taskHttpCalls from "../../http-services/task-services";
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+// import Row from 'react-bootstrap/Row';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Spinner from 'react-bootstrap/Spinner'
@@ -178,8 +178,23 @@ class TaskModal extends Component {
                            </Form.Control>
                         </Form.Group>
 
+                        <Form.Group as={Col} controlId="status">
+                              <Form.Label>Status</Form.Label>
+                              <Form.Control as = "select"
+                                 onChange = {this.handleChange}
+                                 name = "status_id"
+                                 value = {this.state.data.status_id}>
+                              {
+                                 this.state.taskStatuses.map(item =>{
+                                    return <option key={item.id} value={item.id}>{item.name}</option>
+                                 })
+                              }
+                              </Form.Control>
+                           </Form.Group>
+
                      </Form.Row>
-                     <Form.Row>
+
+                     <Form.Row className="align-items-center">
 
                            {/* <Form.Group as={Col} md={3} controlId="assignee">
                               <Form.Label>Assignee</Form.Label>
@@ -195,19 +210,7 @@ class TaskModal extends Component {
                               </Form.Control>
                            </Form.Group> */}
 
-                           <Form.Group as={Col} md={3} style={{marginLeft:'8%'}} controlId="status">
-                              <Form.Label>Status</Form.Label>
-                              <Form.Control as = "select"
-                                 onChange = {this.handleChange}
-                                 name = "status_id"
-                                 value = {this.state.data.status_id}>
-                              {
-                                 this.state.taskStatuses.map(item =>{
-                                    return <option key={item.id} value={item.id}>{item.name}</option>
-                                 })
-                              }
-                           </Form.Control>
-                           </Form.Group>
+
 
                            <Col className="d-flex justify-content-end d-flex align-items-center">
                               {this.props.isNewTask &&

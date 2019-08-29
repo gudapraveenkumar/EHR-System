@@ -18,6 +18,7 @@ import {checkUserLogin} from "./redux-store/actions/auth-actions";
 import AppSideNav from './components/sidenav/side-nav';
 import MyCalendar from './components/calendar/my-calendar';
 import Dashboard from './components/dashboard/dashboard';
+import ChangePassword from './components/profile/change-password';
 
 
 class App extends Component {
@@ -34,13 +35,13 @@ class App extends Component {
           <Row style={{marginLeft:'0px', marginRight:'0px'}}>
             {
                 this.props.authContainer.userLogin &&
-                <Col md="2.7" style={{paddingLeft:'0px'}}>
+                <Col md="2.7" style={{paddingLeft:'0px', height:'100vh'}}>
                   <AppSideNav/>
                 </Col>
             }
 
-            <Col>
-            <div style={{paddingRight:'0px', paddingLeft: '0px'}} className="container-fluid">
+            <Col style={{height:'100vh', overflow: 'auto'}}>
+            <div style={{paddingRight:'0px', paddingLeft: '0px', height:'100%'}} className="container-fluid">
               <Switch>
                 <Route path="/login" component = {Login}/>
                 <Route path="/logout" component = {Logout}/>
@@ -48,6 +49,7 @@ class App extends Component {
                 <ProtectedRoute path="/task-list" component = {TaskList} />
                 <ProtectedRoute path="/my-calendar" component = {MyCalendar}/>
                 <ProtectedRoute path="/dashboard" component = {Dashboard}/>
+                <ProtectedRoute path="/change-password" component = {ChangePassword} />
                 <Route path="/" exact component = {Login}/>
               </Switch>
             </div>
