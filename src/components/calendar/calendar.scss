@@ -1,12 +1,21 @@
-.rbc-toolbar{
-   background: #cbc9da !important;
-   padding: 5px 5px;
+.rbc-toolbar {
+  background: #cbc9da !important;
+  padding: 5px 5px;
 }
 
-.rbc-event-content{
-   background:#53abea !important;
+.rbc-event-content {
+  background: #53abea !important;
 }
 
-.rbc-event{
-   background:#53abea !important;
+.rbc-event {
+  background: #53abea !important;
+}
+
+.calendar-container {
+  height: 80vh;
+  padding: 17px;
+
+  .calendar {
+    margin-top: 20px;
+  }
 }

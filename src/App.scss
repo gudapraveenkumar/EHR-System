@@ -1,0 +1,49 @@
+$low-priority-bg-color: blue;
+$medium-priority-bg-color: orange;
+$high-priority-bg-color: red;
+
+.app-container{
+  overflow-x: hidden;
+
+  .layout-row{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .app-side-nav{
+    padding-left: 0px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .app-content{
+    height: 100vh;
+    overflow: auto;
+  }
+
+  .priority-chip{
+    font-size: 11px;
+    width: fit-content;
+    font-weight: 500;
+    color: white;
+    padding: 1px 8px;
+    border-radius: 3px;
+    margin-top: 6px;
+ }
+ 
+ .low{
+    @extend .priority-chip;
+    background: $low-priority-bg-color;
+ }
+ 
+ .medium{
+    @extend .priority-chip;
+    background: $medium-priority-bg-color;
+ }
+ 
+ .high{
+    @extend .priority-chip;
+    background: $high-priority-bg-color;
+ }
+
+}

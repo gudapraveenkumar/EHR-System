@@ -1,7 +1,6 @@
 export const FOUND_BAD_WORD = "FOUND_BAD_WORD";
 export const DATA_LOADED = "DATA_LOADED";
 
-
 // Login Logout Action Types
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -31,7 +30,5 @@ export const TASK_UPDATE_SUCCESS = "TASK_UPDATE_SUCCESS";
 export const TASK_DELETE_REQUESTED = "TASK_DELETE_REQUESTED";
 export const TASK_DELETE_SUCCESS = "TASK_DELETE_SUCCESS";
 
-
 // Api action Types
 export const API_ERRORED = "API_ERRORED";
-

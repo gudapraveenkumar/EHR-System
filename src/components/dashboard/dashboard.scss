@@ -1,7 +1,15 @@
-.priority-task-count{
-   border-bottom: 1px solid lightgrey,;
-   align-items: flex-center;
-   display: flex;
-   justify-content: space-between;
-   margin-bottom: 5px;
+.priority-task-count {
+  border-bottom: 1px solid lightgrey;
+  align-items: flex-center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.dashboard-section {
+  margin-top: 10px;
+}
+
+.overview-priority-tasks {
+  padding: 8px 15px 2px 15px !important;
 }

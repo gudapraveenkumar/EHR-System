@@ -1,0 +1,41 @@
+$backlog-bg-color: #25d2d2;
+$inProgress-bg-color: #b9a8ef;
+$completed-bg-color: green;
+
+.task-card-container {
+  border: 1px solid #e8e8e8;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  .status-label {
+    height: 25px;
+    padding: 0px 5px;
+    color: white;
+    font-size: 14px;
+  }
+
+  .backlog {
+    @extend .status-label;
+    background: $backlog-bg-color;
+  }
+
+  .in-progress {
+    @extend .status-label;
+    background: $inProgress-bg-color;
+  }
+
+  .completed {
+    @extend .status-label;
+    background: $completed-bg-color;
+  }
+
+  .description {
+    color: grey;
+    font-size: 14px;
+  }
+
+  .date {
+    font-size: 14px;
+  }
+}

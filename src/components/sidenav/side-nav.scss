@@ -1,31 +1,45 @@
-.sidenav{
-   height:100vh;
-   background: #1b2b3a;
-   overflow: auto;
+.sidenav {
+  height: 100vh;
+  background: #1b2b3a;
+  overflow: auto;
 }
 
-.sidenav-header{
-   margin: 0px 22px;
-   font-size: 1.5em;
-   color: white;
-   padding-bottom: 15px;
-   border-bottom: 0.5px solid white;
+.sidenav-header {
+  margin: 0px 22px;
+  font-size: 1.5em;
+  color: white;
+  padding-bottom: 15px;
+  border-bottom: 0.5px solid white;
 }
 
-.sidenav-item{
-   margin: 0px 22px 5px 22px;
-   font-size: 17px;
-   color: white;
-   padding: 15px;
-   border-radius: 4px;
-   cursor: pointer;
-   font-weight: 300;
+.sidenav-item {
+  margin: 0px 22px 5px 22px;
+  font-size: 17px;
+  color: white;
+  padding: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 300;
 }
 
-.active-route{
-   background: #3c4752;
+.sidenav-item-icon {
+  margin: 0px 12px;
 }
 
-.sidenav-item:hover{
-   background: #3c4752
+.sidenav-item-link {
+  color: white;
+  text-decoration: none !important;
+}
+
+.sidenav-item-link:hover {
+  color: white;
+  text-decoration: none !important;
+}
+
+.active-route {
+  background: #3c4752;
+}
+
+.sidenav-item:hover {
+  background: #3c4752;
 }
