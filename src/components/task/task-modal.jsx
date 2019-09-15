@@ -123,7 +123,7 @@ class TaskModal extends Component {
               )}
               {(this.props.taskContainer.apiInProgress ||
                 this.state.apiInProgress) && (
-                <Spinner style={{ marginLeft: "5px" }} animation="border" />
+                <Spinner className="loader" animation="border" />
               )}
             </Modal.Title>
           </Modal.Header>

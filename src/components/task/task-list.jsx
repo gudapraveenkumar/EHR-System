@@ -47,10 +47,7 @@ class TaskList extends Component {
 
     return (
       <div>
-        <Row
-          className="d-flex align-items-center"
-          style={{ margin: "15px 0px" }}
-        >
+        <Row className="task-list-header d-flex align-items-center">
           <Col>
             <h4>My Tasks</h4>
           </Col>
@@ -67,7 +64,7 @@ class TaskList extends Component {
             <div className="task-columns">
               <h5>
                 <FontAwesomeIcon
-                  style={{ marginRight: "10px" }}
+                  className="column-header-icon"
                   icon="clipboard-list"
                 />
                 Backlog
@@ -92,7 +89,7 @@ class TaskList extends Component {
               <h5>
                 {" "}
                 <FontAwesomeIcon
-                  style={{ marginRight: "10px" }}
+                  className="column-header-icon"
                   icon="briefcase"
                 />{" "}
                 In Progress
@@ -115,7 +112,7 @@ class TaskList extends Component {
           >
             <div className="task-columns">
               <h5>
-                <FontAwesomeIcon style={{ marginRight: "10px" }} icon="check" />
+                <FontAwesomeIcon className="column-header-icon" icon="check" />
                 Completed
               </h5>
               {tasks.Completed.map(el => {
