@@ -2,10 +2,10 @@ import * as actionTypes from "../actions/action-types";
 
 const initialState = {
   userObj: {},
-  userLogin: false,
-  userSignup: false,
-  apiInProgress: false,
-  error: false
+  isUserLogin: false,
+  isUserSignup: false,
+  isApiInProgress: false,
+  isError: false
 };
 
 function authReducer(state = initialState, action) {
@@ -13,52 +13,52 @@ function authReducer(state = initialState, action) {
     case actionTypes.LOGIN_REQUEST:
       return {
         ...state,
-        apiInProgress: true,
-        error: false
+        isApiInProgress: true,
+        isError: false
       };
 
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         userObj: action.payload,
-        userLogin: true,
-        apiInProgress: false
+        isUserLogin: true,
+        isApiInProgress: false
       };
 
     case actionTypes.LOGIN_ERROR:
       return {
         ...state,
         userObj: {},
-        error: true,
-        apiInProgress: false
+        isError: true,
+        isApiInProgress: false
       };
 
     case actionTypes.SIGNUP_REQUEST:
       return {
         ...state,
-        apiInProgress: true
+        isApiInProgress: true
       };
 
     case actionTypes.SIGNUP_SUCCESS:
       return {
         ...state,
-        apiInProgress: false,
-        userSignup: true
+        isApiInProgress: false,
+        isUserSignup: true
       };
 
     case actionTypes.SIGNUP_ERROR:
       return {
         ...state,
         userObj: {},
-        error: true,
-        apiInProgress: false
+        isError: true,
+        isApiInProgress: false
       };
 
     case actionTypes.LOGOUT_SUCCESS:
       return {
         ...state,
         userObj: action.payload,
-        userLogin: false
+        isUserLogin: false
       };
 
     default:

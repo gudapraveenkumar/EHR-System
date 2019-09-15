@@ -3,10 +3,9 @@ import * as actionTypes from "../actions/action-types";
 const initialState = {
   tasks: [],
   error: "",
-  apiInProgress: false,
-  newTaskCreated: false,
-  taskUpdated: false,
-  taskDeleted: false,
+  isApiInProgress: false,
+  isTaskCreated: false,
+  isTaskDeleted: false,
   selectedTask: {}
 };
 
@@ -17,49 +16,49 @@ function taskReducer(state = initialState, action) {
       return {
         ...state,
         tasks: action.payload,
-        apiInProgress: false
+        isApiInProgress: false
       };
 
     case actionTypes.NEW_TASK_REQUESTED:
       return {
         ...state,
-        apiInProgress: true,
-        newTaskCreated: false
+        isApiInProgress: true,
+        isTaskCreated: false
       };
 
     case actionTypes.NEW_TASK_SUCCESS:
       return {
         ...state,
-        apiInProgress: false,
-        newTaskCreated: true
+        isApiInProgress: false,
+        isTaskCreated: true
       };
 
     case actionTypes.TASK_DETAILS_REQUESTED:
       return {
         ...state,
-        apiInProgress: true,
+        isApiInProgress: true,
         selectedTask: {}
       };
 
     case actionTypes.TASK_DETAILS_SUCCESS:
       return {
         ...state,
-        apiInProgress: false,
+        isApiInProgress: false,
         selectedTask: action.taskDetails
       };
 
     case actionTypes.TASK_DELETE_REQUESTED:
       return {
         ...state,
-        apiInProgress: true,
-        taskDeleted: false
+        isApiInProgress: true,
+        isTaskDeleted: false
       };
 
     case actionTypes.TASK_DELETE_SUCCESS:
       return {
         ...state,
-        apiInProgress: false,
-        taskDeleted: true
+        isApiInProgress: false,
+        isTaskDeleted: true
       };
 
     case actionTypes.FOUND_BAD_WORD:

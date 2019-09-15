@@ -33,11 +33,11 @@ class Login extends Component {
   };
 
   render() {
-    if (this.props.authContainer.userLogin) {
+    if (this.props.authContainer.isUserLogin) {
       return <Redirect to="/dashboard" />;
     }
     const { username, password } = this.state.loginData;
-    const { apiInProgress } = this.props.authContainer;
+    const { isApiInProgress } = this.props.authContainer;
 
     return (
       <Card>
@@ -68,9 +68,13 @@ class Login extends Component {
 
             <div className="text-right">
               <Button variant="link">Forgot Password</Button>
-              <Button type="submit" disabled={apiInProgress} variant="primary">
-                {apiInProgress && <LoadingSpinner />}
-                {!apiInProgress && <span>Login</span>}
+              <Button
+                type="submit"
+                disabled={isApiInProgress}
+                variant="primary"
+              >
+                {isApiInProgress && <LoadingSpinner />}
+                {!isApiInProgress && <span>Login</span>}
               </Button>
             </div>
           </Form>

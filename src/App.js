@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div className="app-container">
         <Row className="layout-row">
-          {this.props.authContainer.userLogin && (
+          {this.props.authContainer.isUserLogin && (
             <Col className="app-side-nav" md="2.7">
               <AppSideNav />
             </Col>

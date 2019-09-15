@@ -29,15 +29,15 @@ class TaskModal extends Component {
       },
       taskPriorities: [],
       taskStatuses: [],
-      apiInProgress: false
+      isApiInProgress: false
     };
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   getTaskDetailsHandler = async () => {
-    let apiInProgress = { ...this.state.apiInProgress };
-    apiInProgress = true;
-    this.setState({ apiInProgress });
+    let isApiInProgress = { ...this.state.isApiInProgress };
+    isApiInProgress = true;
+    this.setState({ isApiInProgress });
     const response = await taskHttpCalls.fetchTaskById(this.props.taskId);
 
     const taskDetails = {
@@ -50,9 +50,9 @@ class TaskModal extends Component {
     };
     let { data } = { ...this.state.data };
     data = taskDetails;
-    apiInProgress = false;
-    this.setState({ apiInProgress });
-    this.setState({ data, apiInProgress });
+    isApiInProgress = false;
+    this.setState({ isApiInProgress });
+    this.setState({ data, isApiInProgress });
   };
 
   async componentDidMount() {
@@ -121,8 +121,8 @@ class TaskModal extends Component {
               ) : (
                 <span>Task Details</span>
               )}
-              {(this.props.taskContainer.apiInProgress ||
-                this.state.apiInProgress) && (
+              {(this.props.taskContainer.isApiInProgress ||
+                this.state.isApiInProgress) && (
                 <Spinner className="loader" animation="border" />
               )}
             </Modal.Title>

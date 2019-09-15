@@ -34,7 +34,7 @@ class Registration extends Component {
   };
 
   render() {
-    if (this.props.authContainer.userSignup) {
+    if (this.props.authContainer.isUserSignup) {
       return <Redirect to="/auth" />;
     }
 
@@ -80,11 +80,11 @@ class Registration extends Component {
             <div className="text-right">
               <Button
                 type="submit"
-                disabled={this.props.authContainer.apiInProgress}
+                disabled={this.props.authContainer.isApiInProgress}
                 variant="primary"
               >
-                {this.props.authContainer.apiInProgress && <LoadingSpinner />}
-                {!this.props.authContainer.apiInProgress && (
+                {this.props.authContainer.isApiInProgress && <LoadingSpinner />}
+                {!this.props.authContainer.isApiInProgress && (
                   <span>Register</span>
                 )}
               </Button>
