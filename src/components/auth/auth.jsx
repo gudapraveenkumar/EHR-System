@@ -12,7 +12,7 @@ class Auth extends Component {
     isLogin: true
   };
 
-  toggleAuth = () => {
+  toggleRegisterLogin = () => {
     let isLogin = { ...this.state };
     isLogin = !this.state.isLogin;
     this.setState({ isLogin });
@@ -26,7 +26,7 @@ class Auth extends Component {
           <Login />
           <div className="text-center">
             Don't have an account{" "}
-            <Button onClick={this.toggleAuth} variant="link">
+            <Button onClick={this.toggleRegisterLogin} variant="link">
               Register
             </Button>
           </div>
@@ -38,7 +38,7 @@ class Auth extends Component {
           <Registration />
           <div className="text-center">
             Already have an account{" "}
-            <Button onClick={this.toggleAuth} variant="link">
+            <Button onClick={this.toggleRegisterLogin} variant="link">
               Login
             </Button>
           </div>
@@ -52,7 +52,7 @@ class Auth extends Component {
           <Col className="debba align-self-center" xs={10} sm={8} md={5}>
             <h3 className="text-center">
               <FontAwesomeIcon className="header-icon" icon="tasks" />
-              ERH System
+              EHR System
             </h3>
             {authContent}
           </Col>

@@ -24,7 +24,7 @@ class Dashboard extends Component {
     this.setState({ showTaskDetailsModal: true, selectedTask: task });
   };
 
-  closeTaskDetailsModal = () => {
+  closeTaskDetailsModalHandler = () => {
     this.setState({ showTaskDetailsModal: false, selectedTask: {} });
   };
 
@@ -37,7 +37,7 @@ class Dashboard extends Component {
           <TaskModal
             taskId={this.state.selectedTask.id}
             isNewTask={false}
-            closeModal={this.closeTaskDetailsModal}
+            closeModal={this.closeTaskDetailsModalHandler}
             openModal={this.state.showTaskDetailsModal}
           />
         )}

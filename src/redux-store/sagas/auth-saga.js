@@ -21,6 +21,7 @@ function* authorize(params) {
     yield put({ type: authActions.LOGIN_ERROR, error });
   } finally {
     if (yield cancelled()) {
+      toast.error("Please Refresh and Try Again!");
       // we can add some clearing state varialbes logic like isloading state variable to true or false
     }
   }

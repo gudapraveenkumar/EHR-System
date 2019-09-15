@@ -12,7 +12,7 @@ class TaskCard extends Component {
     this.setState({ showTaskDetailsModal: true, selectedTask: task });
   };
 
-  closeTaskDetailsModal = () => {
+  closeTaskDetailsModalHandler = () => {
     this.setState({ showTaskDetailsModal: false, selectedTask: {} });
   };
 
@@ -30,7 +30,7 @@ class TaskCard extends Component {
           <TaskModal
             taskId={this.state.selectedTask.id}
             isNewTask={false}
-            closeModal={this.closeTaskDetailsModal}
+            closeModal={this.closeTaskDetailsModalHandler}
             openModal={this.state.showTaskDetailsModal}
           />
         )}

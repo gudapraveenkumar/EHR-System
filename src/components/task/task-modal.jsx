@@ -34,7 +34,7 @@ class TaskModal extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
-  getTaskDetails = async () => {
+  getTaskDetailsHandler = async () => {
     let apiInProgress = { ...this.state.apiInProgress };
     apiInProgress = true;
     this.setState({ apiInProgress });
@@ -59,7 +59,7 @@ class TaskModal extends Component {
     const { data: priorities } = await taskHttpCalls.fetchTaskPriorities();
     const { data: statuses } = await taskHttpCalls.fetchTaskStatuses();
     if (!this.props.isNewTask) {
-      this.getTaskDetails();
+      this.getTaskDetailsHandler();
     }
     this.setState({
       taskPriorities: priorities.tasks,
