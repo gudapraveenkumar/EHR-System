@@ -12,6 +12,9 @@ class Auth extends Component {
     isLogin: true
   };
 
+  /**
+   * Toggle Registration and Login views
+   */
   toggleRegisterLogin = () => {
     let isLogin = { ...this.state };
     isLogin = !this.state.isLogin;
@@ -25,7 +28,7 @@ class Auth extends Component {
         <React.Fragment>
           <Login />
           <div className="text-center">
-            Don't have an account{" "}
+            Don't have an account
             <Button onClick={this.toggleRegisterLogin} variant="link">
               Register
             </Button>
@@ -37,7 +40,7 @@ class Auth extends Component {
         <React.Fragment>
           <Registration />
           <div className="text-center">
-            Already have an account{" "}
+            Already have an account
             <Button onClick={this.toggleRegisterLogin} variant="link">
               Login
             </Button>

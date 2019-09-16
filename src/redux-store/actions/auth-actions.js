@@ -4,15 +4,14 @@ import { removeAppData, storeAppData } from "../../helper/manage-storage";
 export function loginActionHandler(userData) {
   return {
     type: actionTypes.LOGIN_REQUEST,
-    data: userData
+    payload: userData
   };
 }
 
-export function signupActionHandler(userData, ownProps) {
+export function signupActionHandler(userData) {
   return {
     type: actionTypes.SIGNUP_REQUEST,
-    data: userData,
-    ownProps: ownProps
+    payload: userData
   };
 }
 

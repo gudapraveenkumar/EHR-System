@@ -17,7 +17,7 @@ class Registration extends Component {
     }
   };
 
-  handleChange = ({ currentTarget: input }) => {
+  handleInputChange = ({ currentTarget: input }) => {
     const signupData = { ...this.state.signupData };
     signupData[input.name] = input.value;
     this.setState({ signupData });
@@ -27,7 +27,7 @@ class Registration extends Component {
     e.preventDefault();
     const data = { ...this.state.signupData };
     if (data.username && data.password && data.email) {
-      this.props.onRegister(this.state.signupData, this.props);
+      this.props.onRegister(this.state.signupData);
     } else {
       toast.warn("Please enter details");
     }
@@ -61,7 +61,7 @@ class Registration extends Component {
                 type="text"
                 value={username}
                 name="username"
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
                 placeholder="Enter username"
               />
             </Form.Group>
@@ -72,7 +72,7 @@ class Registration extends Component {
                 type="password"
                 value={password}
                 name="password"
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
                 placeholder="Enter Password"
               />
             </Form.Group>
@@ -99,7 +99,7 @@ class Registration extends Component {
 const mapsDispatchToProps = dispatch => {
   return {
     onRegister: (signupData, ownProps) =>
-      dispatch(signupActionHandler(signupData, ownProps))
+      dispatch(signupActionHandler(signupData))
   };
 };
 

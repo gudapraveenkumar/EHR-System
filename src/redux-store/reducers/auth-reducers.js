@@ -36,7 +36,8 @@ function authReducer(state = initialState, action) {
     case actionTypes.SIGNUP_REQUEST:
       return {
         ...state,
-        isApiInProgress: true
+        isApiInProgress: true,
+        isError: false
       };
 
     case actionTypes.SIGNUP_SUCCESS:

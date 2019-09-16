@@ -29,8 +29,8 @@ function* authorize(params) {
 
 function* registerUser(params) {
   try {
-    const { data } = params;
-    const response = yield call(auth.signup, data);
+    const { payload } = params;
+    const response = yield call(auth.signup, payload);
     yield put({ type: authActions.SIGNUP_SUCCESS, response }); // Dispatches the action to actions file or reducer
     toast.success("Signup Successfull !, Please Login");
   } catch (error) {
@@ -45,9 +45,9 @@ function* logout() {
 
 export default function* loginSaga() {
   while (true) {
-    const { data } = yield take(authActions.LOGIN_REQUEST);
+    const { payload } = yield take(authActions.LOGIN_REQUEST);
     // Fork return a task object
-    const task = yield fork(authorize, data);
+    const task = yield fork(authorize, payload);
     const action = yield take([
       authActions.LOGOUT_REQUEST,
       authActions.LOGIN_ERROR

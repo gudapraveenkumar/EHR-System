@@ -69,7 +69,7 @@ class TaskModal extends Component {
 
   abortController = new AbortController();
 
-  handleChange = ({ currentTarget: input }) => {
+  handleInputChange = ({ currentTarget: input }) => {
     const data = { ...this.state.data };
     if (input.name === "priority_id" || input.name === "status_id") {
       data[input.name] = parseInt(input.value);
@@ -136,7 +136,7 @@ class TaskModal extends Component {
                   type="text"
                   value={this.state.data.title}
                   name="title"
-                  onChange={this.handleChange}
+                  onChange={this.handleInputChange}
                   placeholder="Enter Title"
                 />
               </Form.Group>
@@ -147,7 +147,7 @@ class TaskModal extends Component {
                   as="textarea"
                   placeholder="Enter Description"
                   name="description"
-                  onChange={this.handleChange}
+                  onChange={this.handleInputChange}
                   value={this.state.data.description}
                   rows="2"
                 />
@@ -176,7 +176,7 @@ class TaskModal extends Component {
                   <Form.Label>Priority</Form.Label>
                   <Form.Control
                     as="select"
-                    onChange={this.handleChange}
+                    onChange={this.handleInputChange}
                     name="priority_id"
                     value={this.state.data.priority_id}
                   >
@@ -194,7 +194,7 @@ class TaskModal extends Component {
                   <Form.Label>Status</Form.Label>
                   <Form.Control
                     as="select"
-                    onChange={this.handleChange}
+                    onChange={this.handleInputChange}
                     name="status_id"
                     value={this.state.data.status_id}
                   >

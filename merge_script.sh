@@ -14,10 +14,9 @@ commit_website_files() {
 upload_files() {
    git remote -v
    git remote remove origin
-   git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/gudapraveenkumar/task-manager.git
-   # git remote add origin https://gudapraveenkumar:${GITHUB_KEY}@gudapraveenkumar/task-manager.git > /dev/null 2>&1
-   # git remote add origin-pages https://${GITHUB_KEY}@github.com/gudapraveenkumar/task-manager.git > /dev/null 2>&1
-   # git push --quiet origin master
+   git remote add origin https://gudapraveenkumar:${GITHUB_KEY}@gudapraveenkumar/task-manager.git > /dev/null 2>&1
+   git remote add origin-pages https://${GITHUB_KEY}@github.com/gudapraveenkumar/task-manager.git > /dev/null 2>&1
+   git push --quiet origin master
 }
 
 setup_git

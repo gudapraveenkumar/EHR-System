@@ -2,9 +2,9 @@ import http from "./common-services";
 import { apiEndpoint } from "../config.json";
 
 const apiUrl = `${apiEndpoint}`;
+const token = localStorage.getItem("token");
 
 function setToken() {
-  const token = localStorage.getItem("token");
   http.setJwt(token);
 }
 

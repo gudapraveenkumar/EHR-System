@@ -16,7 +16,7 @@ class Login extends Component {
     }
   };
 
-  handleChange = ({ currentTarget: input }) => {
+  handleInputChange = ({ currentTarget: input }) => {
     const loginData = { ...this.state.loginData };
     loginData[input.name] = input.value;
     this.setState({ loginData });
@@ -50,7 +50,7 @@ class Login extends Component {
                 type="text"
                 value={username}
                 name="username"
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
                 placeholder="Enter username"
               />
             </Form.Group>
@@ -61,7 +61,7 @@ class Login extends Component {
                 type="password"
                 value={password}
                 name="password"
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
                 placeholder="Enter Password"
               />
             </Form.Group>
