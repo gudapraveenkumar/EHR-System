@@ -2,35 +2,39 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Joi from "joi-browser";
 import { Redirect } from "react-router-dom";
 import { signupActionHandler } from "../../redux-store/actions/auth-actions";
 import { connect } from "react-redux";
 import LoadingSpinner from "../commons/loading-spinner";
-import { toast } from "react-toastify";
+import AppForm from "../commons/form";
 
-class Registration extends Component {
+class Registration extends AppForm {
   state = {
-    signupData: {
+    data: {
       username: "",
       password: "",
       email: ""
-    }
+    },
+    errors: {}
   };
 
-  handleInputChange = ({ currentTarget: input }) => {
-    const signupData = { ...this.state.signupData };
-    signupData[input.name] = input.value;
-    this.setState({ signupData });
+  schema = {
+    username: Joi.string()
+      .required()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .label("Password"),
+    email: Joi.string()
+      .email()
+      .required()
+      .label("Email")
   };
 
-  handleRegisterSubmit = e => {
-    e.preventDefault();
-    const data = { ...this.state.signupData };
-    if (data.username && data.password && data.email) {
-      this.props.onRegister(this.state.signupData);
-    } else {
-      toast.warn("Please enter details");
-    }
+  doSubmit = e => {
+    console.log("DEBBA ", this.state.data);
+    // this.props.onRegister(this.state.signupData);
   };
 
   render() {
@@ -38,44 +42,15 @@ class Registration extends Component {
       return <Redirect to="/auth" />;
     }
 
-    const { email, username, password } = this.state.signupData;
     return (
       <Card>
         <Card.Body>
           <Card.Title className="text-center"> Register</Card.Title>
-          <Form onSubmit={this.handleRegisterSubmit}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email Id</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                name="email"
-                onChange={this.handleChange}
-                placeholder="Enter email"
-              />
-            </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                value={username}
-                name="username"
-                onChange={this.handleInputChange}
-                placeholder="Enter username"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                name="password"
-                onChange={this.handleInputChange}
-                placeholder="Enter Password"
-              />
-            </Form.Group>
+          <Form onSubmit={this.handleSubmit}>
+            {this.renderInput("email", "Enter email")}
+            {this.renderInput("username", "Enter Username")}
+            {this.renderInput("password", "Enter password", "password")}
 
             <div className="text-right">
               <Button

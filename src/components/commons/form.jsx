@@ -4,7 +4,7 @@ import Input from "./input";
 
 class AppForm extends Component {
   state = {
-    data: {},
+    data: { username: "" },
     errors: {}
   };
 
@@ -23,7 +23,6 @@ class AppForm extends Component {
   };
 
   validateProperty = ({ name, value }) => {
-    // Creating dynamic object with computed property whatever the name at runtime that will set to the key
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.validate(obj, schema);
@@ -51,7 +50,6 @@ class AppForm extends Component {
 
   renderInput(name, placeholder, type = "text") {
     const { data, errors } = this.state;
-    console.log(data);
     return (
       <Input
         type={type}
