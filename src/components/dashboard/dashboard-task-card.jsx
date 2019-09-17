@@ -17,19 +17,22 @@ const DashboardTaskCard = ({ task, openTask }) => {
   return (
     <div onClick={openTask} className="task-card-container">
       <Row>
-        <Col>
+        <Col md={6}>
           <div>{task.title}</div>
           <div className="description">{task.description}</div>
         </Col>
-        <Col md="auto" className="d-flex align-items-center">
+        <Col md={2} className="d-flex align-items-center">
           <div className={labelClassName}>{task.status.name}</div>
         </Col>
-        <Col className="d-flex flex-row justify-content-center align-items-center">
+        <Col
+          md={3}
+          className="d-flex flex-row justify-content-center align-items-center"
+        >
           <div className="text-center date">
             End Date: <Moment format="YYYY-MM-DD">{task.end}</Moment>
           </div>
         </Col>
-        <Col md="auto" className="d-flex align-items-center">
+        <Col md={1} className="d-flex align-items-center">
           <div className={chipClassName}>{task.priority.name}</div>
         </Col>
       </Row>
