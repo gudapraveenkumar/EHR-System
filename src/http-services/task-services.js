@@ -2,10 +2,9 @@ import http from "./common-services";
 import { apiEndpoint } from "../config.json";
 
 const apiUrl = `${apiEndpoint}`;
-const token = localStorage.getItem("token");
 
 function setToken() {
-  http.setJwt(token);
+  http.setJwt(localStorage.getItem("token"));
 }
 
 export function fetchTasks() {
