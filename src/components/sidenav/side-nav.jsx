@@ -29,7 +29,7 @@ class AppSideNav extends Component {
         <br></br>
         <div className="sidenav-header">
           <FontAwesomeIcon icon="tasks" />
-          <span> EHR System</span>
+          <span> Task Manager</span>
         </div>
         <br></br>
 

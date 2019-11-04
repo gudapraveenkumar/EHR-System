@@ -29,8 +29,7 @@ class MyCalendar extends Component {
           className="calendar"
           localizer={localizer}
           events={events}
-          startAccessor="start"
-          endAccessor="end"
+
         />
       </div>
     );

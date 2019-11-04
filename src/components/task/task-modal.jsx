@@ -67,6 +67,7 @@ class TaskModal extends Component {
     });
   }
 
+
   abortController = new AbortController();
 
   handleInputChange = ({ currentTarget: input }) => {

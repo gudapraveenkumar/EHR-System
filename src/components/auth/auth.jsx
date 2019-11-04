@@ -55,7 +55,7 @@ class Auth extends Component {
           <Col className="debba align-self-center" xs={10} sm={8} md={5}>
             <h3 className="text-center">
               <FontAwesomeIcon className="header-icon" icon="tasks" />
-              EHR System
+              Task Manager
             </h3>
             {authContent}
           </Col>
